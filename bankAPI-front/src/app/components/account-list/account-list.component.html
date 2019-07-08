@@ -1,0 +1,20 @@
+<table class="table table-bordered table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Account Number</th>
+      <th scope="col">Money</th>
+      <th scope="col">Currency</th>
+      <th scope="col">Owner</th>
+    </tr>
+  </thead>
+
+    <tr *ngFor="let account of accounts">
+      <td>{{ account.accountId }}</td>
+      <td>{{ account.accountNumber }}</td>
+      <td>{{ account.money }}</td>
+      <td>{{ account.currency }}</td>
+      <td>{{ account.ownerName }}</td>
+    </tr>
+</table>
+
