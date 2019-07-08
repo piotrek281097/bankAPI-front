@@ -24,9 +24,8 @@ export class AccountService {
     return this.http.get<Account[]>('/api/accounts', {headers: this.headersObject});
   }
 
-  /*
-  public save(user: User) {
-    return this.http.post<User>(this.usersUrl, user);
+
+  public save(account: Account) {
+    return this.http.post<Account>('/api/accounts/add', account);
   }
-  */
 }

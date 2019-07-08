@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Formatka rachunku</h1>
+  <form>
+    <div class="form-group">
+      <label for="name">Numer rachunku</label>
+      <input type="text" class="form-control" id="accountNumber" >
+    </div>
+
+    <div class="form-group">
+      <label for="money">Pieniądze</label>
+      <input type="text" class="form-control" id="money">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Waluta</label>
+      <input type="text" class="form-control" id="currency" >
+    </div>
+
+    <div class="form-group">
+      <label for="money">Właściciel rachunku</label>
+      <input type="text" class="form-control" id="accountOwner">
+    </div>
+
+    <button (click)="addAccount()"  class="btn btn-success">Submit</button>
+
+  </form>
+</div>

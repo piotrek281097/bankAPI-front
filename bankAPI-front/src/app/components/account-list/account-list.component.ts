@@ -11,11 +11,11 @@ export class AccountListComponent implements OnInit {
 
   accounts: Account[];
 
-  constructor(private userService: AccountService) {
+  constructor(private accountService: AccountService) {
   }
 
   ngOnInit() {
-    this.userService.getAllAccounts().subscribe(data => {
+    this.accountService.getAllAccounts().subscribe(data => {
       this.accounts = data;
     });
   }
