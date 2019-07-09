@@ -1,8 +1,11 @@
 export class Transfer {
   firstAccountNumber: string;
   secondAccountNumber: string;
+  money: number;
   currency: string;
-  ownerName: string;
+  dataOpenTransfer: string;
+  dataFinishTransfer: string;
+  transferStatus: string;
 
   constructor() {}
 }

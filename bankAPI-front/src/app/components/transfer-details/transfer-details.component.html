@@ -1,1 +1,26 @@
 <p>transfer-details works!</p>
+<table class="table table-bordered table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nr</th>
+      <th scope="col">Numer konta nadawcy</th>
+      <th scope="col">Numer konta odbiorcy</th>
+      <th scope="col">Przelane środki</th>
+      <th scope="col">Waluta</th>
+      <th scope="col">Data zgłoszenia przelewu</th>
+      <th scope="col">Data wykonania przelewu</th>
+      <th scope="col">Status transferu</th>
+    </tr>
+  </thead>
+
+    <tr *ngFor="let transfer of transfersForOneAccountNumber; let i=index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ transfer.firstAccountNumber }}</td>
+      <td>{{ transfer.secondAccountNumber }}</td>
+      <td>{{ transfer.money }}</td>
+      <td>{{ transfer.currency }}</td>
+      <td>{{ transfer.dataOpenTransfer }}</td>
+      <td>{{ transfer.dataFinishTransfer }}</td>
+      <td>{{ transfer.transferStatus }}</td>
+    </tr>
+</table>

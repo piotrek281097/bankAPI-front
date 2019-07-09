@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
 import { Account } from 'src/app/models/account';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-list',
@@ -11,7 +12,7 @@ export class AccountListComponent implements OnInit {
 
   accounts: Account[];
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService, private router: Router) {
   }
 
   ngOnInit() {
@@ -20,8 +21,9 @@ export class AccountListComponent implements OnInit {
     });
   }
 
-  onClickRow(accountNumber) {
-    console.log("dziala " + accountNumber);
+  onClickRow(accountNumber: string) {
+    console.log("onclickrow dziala " + accountNumber);
+    this.router.navigate(['/transferdetails/' + accountNumber]);
   }
 
   editAccount(accountNumber: string) {
