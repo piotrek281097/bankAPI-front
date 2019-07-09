@@ -26,6 +26,9 @@ export class AccountService {
 
 
   public save(account: Account) {
-    return this.http.post<Account>('/api/accounts/add', account);
+    this.prepareHeader();
+    console.log("save______________");
+    return this.http.post<Account>('/api/accounts/add', account, {headers: this.headersObject})
   }
+
 }

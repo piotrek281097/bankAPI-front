@@ -1,27 +1,28 @@
 <div class="container">
   <h1>Formatka rachunku</h1>
-  <form>
+  <form [formGroup]="accountForm">
+
     <div class="form-group">
-      <label for="name">Numer rachunku</label>
-      <input type="text" class="form-control" id="accountNumber" >
+      <label for="accountNumber">Numer rachunku</label>
+      <input type="text" class="form-control" id="accountNumber" formControlName="accountNumber">
     </div>
 
     <div class="form-group">
       <label for="money">Pieniądze</label>
-      <input type="text" class="form-control" id="money">
+      <input type="text" class="form-control" id="money" formControlName="money">
     </div>
 
     <div class="form-group">
-      <label for="name">Waluta</label>
-      <input type="text" class="form-control" id="currency" >
+      <label for="currency">Waluta</label>
+      <input type="text" class="form-control" id="currency" formControlName="currency">
     </div>
 
     <div class="form-group">
-      <label for="money">Właściciel rachunku</label>
-      <input type="text" class="form-control" id="accountOwner">
+      <label for="ownerName">Właściciel rachunku</label>
+      <input type="text" class="form-control" id="ownerName" formControlName="ownerName">
     </div>
 
-    <button (click)="addAccount()"  class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success" (click)="onSubmit()">Submit</button>
 
   </form>
 </div>
