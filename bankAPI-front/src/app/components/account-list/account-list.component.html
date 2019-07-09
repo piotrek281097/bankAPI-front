@@ -1,20 +1,24 @@
 <table class="table table-bordered table-striped">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">Id</th>
+      <th scope="col">Nr</th>
       <th scope="col">Account Number</th>
       <th scope="col">Money</th>
       <th scope="col">Currency</th>
       <th scope="col">Owner</th>
+      <th scope="col">Edycja</th>
+      <th scope="col">Usunięcie</th>
     </tr>
   </thead>
 
-    <tr *ngFor="let account of accounts">
-      <td>{{ account.accountId }}</td>
+    <tr *ngFor="let account of accounts; let i=index" (click)="onClickRow(account.accountNumber)">
+      <td>{{ i + 1 }}</td>
       <td>{{ account.accountNumber }}</td>
       <td>{{ account.money }}</td>
       <td>{{ account.currency }}</td>
       <td>{{ account.ownerName }}</td>
+      <td><button type="submit" class="btn btn-warning" (click)="editAccount(account.accountNumber)">Edytuj</button></td>
+      <td><button type="submit" class="btn btn-danger" (click)="deleteAccount(account.accountNumber)">Usuń</button></td>
     </tr>
 </table>
 

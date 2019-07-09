@@ -22,26 +22,26 @@ export class AccountFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-
     private accountService: AccountService) { }
 
-ngOnInit() {
-  this.accountForm = this.formBuilder.group({
-    accountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26)]],
-    money: ['', [Validators.required ]],
-    currency: ['', [Validators.pattern('[A-Z][A-Z][A-Z]')]],
-    ownerName: ['', [Validators.required, Validators.maxLength(50)]]
-});
-}
+  ngOnInit() {
+    this.accountForm = this.formBuilder.group({
+      accountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26)]],
+      money: ['', [Validators.required ]],
+      currency: ['', [Validators.pattern('[A-Z][A-Z][A-Z]')]],
+      ownerName: ['', [Validators.required, Validators.maxLength(50)]]
+    });
+  }
 
 
   onSubmit() {
-      const accountToAdd: Account = new Account();
+      let accountToAdd: Account = new Account();
+
       console.log(this.accountForm.value.accountNumber);
       accountToAdd.accountNumber = this.accountForm.value.accountNumber;
       console.log(this.accountForm.value.money);
       accountToAdd.money = this.accountForm.value.money;
-      console.log(accountToAdd.currency = this.accountForm.value.currency);
+      console.log(this.accountForm.value.currency);
       accountToAdd.currency = this.accountForm.value.currency;
       console.log(this.accountForm.value.ownerName);
       accountToAdd.ownerName = this.accountForm.value.ownerName;

@@ -1,0 +1,23 @@
+<div class="container">
+    <h1>Formatka transferu</h1>
+    <form [formGroup]= "transferForm">
+
+      <div class="form-group">
+        <label for="firstAccountNumber">Numer rachunku nadawcy</label>
+        <input type="text" class="form-control" id="firstAccountNumber" formControlName="firstAccountNumber">
+      </div>
+
+      <div class="form-group">
+        <label for="secondAccountNumber">Numer rachunku odbiorcy</label>
+        <input type="text" class="form-control" id="secondAccountNumber" formControlName="secondAccountNumber">
+      </div>
+
+      <div class="form-group">
+        <label for="money">Wartość przelewu</label>
+        <input type="text" class="form-control" id="money" formControlName="money">
+      </div>
+
+      <button type="submit" class="btn btn-success" (click)="onSubmit()">Wykonaj przelew</button>
+
+    </form>
+  </div>

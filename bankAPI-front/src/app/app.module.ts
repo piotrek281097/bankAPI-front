@@ -9,6 +9,9 @@ import { HomeComponent } from './components/home/home.component';
 import { AccountListComponent } from './components/account-list/account-list.component';
 import { AccountService } from 'src/app/services/account.service';
 import { AccountFormComponent } from 'src/app/components/account-form/account-form.component';
+import { TransferFormComponent } from './components/transfer-form/transfer-form.component';
+import { TransferService } from './services/transfer.service';
+import { TransferDetailsComponent } from './components/transfer-details/transfer-details.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,8 @@ import { AccountFormComponent } from 'src/app/components/account-form/account-fo
     HomeComponent,
     AccountListComponent,
     AccountFormComponent,
+    TransferFormComponent,
+    TransferDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,7 @@ import { AccountFormComponent } from 'src/app/components/account-form/account-fo
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [AccountService],
+  providers: [AccountService, TransferService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

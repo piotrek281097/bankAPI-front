@@ -27,8 +27,14 @@ export class AccountService {
 
   public save(account: Account) {
     this.prepareHeader();
-    console.log("save______________");
-    return this.http.post<Account>('/api/accounts/add', account, {headers: this.headersObject})
+
+    return this.http.post('/api/accounts/add', account, {headers: this.headersObject}).subscribe(a => a);
+  }
+
+  public delete(accountNumber: string) {
+    this.prepareHeader();
+
+    this.http.delete('/api/accounts/delete/' + accountNumber, {headers: this.headersObject}).subscribe(a => a);
   }
 
 }

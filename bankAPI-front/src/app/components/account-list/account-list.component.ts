@@ -20,4 +20,17 @@ export class AccountListComponent implements OnInit {
     });
   }
 
+  onClickRow(accountNumber) {
+    console.log("dziala " + accountNumber);
+  }
+
+  editAccount(accountNumber: string) {
+    console.log("edit " + accountNumber);
+  }
+
+  deleteAccount(accountNumber: string) {
+    console.log("delete " + accountNumber);
+    this.accountService.delete(accountNumber);
+  }
+
 }
