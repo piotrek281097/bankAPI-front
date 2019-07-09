@@ -12,17 +12,17 @@ import { Transfer } from 'src/app/models/transfer';
 export class TransferDetailsComponent implements OnInit {
 
   transfersForOneAccountNumber: Transfer[];
+  accountNumber: string;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private transferService: TransferService
   ) {}
 
   ngOnInit() {
-   console.log("route " + this.route.snapshot.paramMap.get('accountNumber'));
+    this.accountNumber = this.route.snapshot.paramMap.get('accountNumber');
 
-   this.transferService.getTransfersByAccountNumber(this.route.snapshot.paramMap.get('accountNumber')).subscribe(data => {
+    this.transferService.getTransfersByAccountNumber(this.route.snapshot.paramMap.get('accountNumber')).subscribe(data => {
     this.transfersForOneAccountNumber = data;
   });
   }
