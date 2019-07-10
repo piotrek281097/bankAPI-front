@@ -12,6 +12,8 @@ import { AccountFormComponent } from 'src/app/components/account-form/account-fo
 import { TransferFormComponent } from './components/transfer-form/transfer-form.component';
 import { TransferService } from './services/transfer.service';
 import { TransferDetailsComponent } from './components/transfer-details/transfer-details.component';
+import { EditAccountFormComponent } from './components/edit-account-form/edit-account-form.component';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { TransferDetailsComponent } from './components/transfer-details/transfer
     AccountFormComponent,
     TransferFormComponent,
     TransferDetailsComponent,
+    EditAccountFormComponent
+
   ],
   imports: [
     BrowserModule,

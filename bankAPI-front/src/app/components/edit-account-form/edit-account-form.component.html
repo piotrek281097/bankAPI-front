@@ -1,0 +1,26 @@
+<p>edit-account-form works!</p>
+<div class="container">
+    <h1>Edycja rachunku</h1>
+    <form [formGroup]="accountEditForm">
+
+      <h3>Nr rachunku:   <span class="badge badge-secondary"> {{ accountNumber }}</span></h3>
+
+      <div class="form-group">
+        <label for="money">Pieniądze</label>
+        <input type="text" class="form-control" id="money" formControlName="money">
+      </div>
+
+      <div class="form-group">
+        <label for="currency">Waluta</label>
+        <input type="text" class="form-control" id="currency" formControlName="currency">
+      </div>
+
+      <div class="form-group">
+        <label for="ownerName">Właściciel rachunku</label>
+        <input type="text" class="form-control" id="ownerName" formControlName="ownerName">
+      </div>
+
+      <button type="submit" class="btn btn-success" (click)="onSubmit()">Dodaj rachunek</button>
+
+    </form>
+  </div>

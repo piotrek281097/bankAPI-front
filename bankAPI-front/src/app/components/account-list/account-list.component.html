@@ -1,3 +1,4 @@
+<h1>Lista rachunków<span class="badge badge-secondary"></span></h1>
 <table class="table table-bordered table-striped">
   <thead class="thead-dark">
     <tr>
@@ -11,12 +12,12 @@
     </tr>
   </thead>
 
-    <tr *ngFor="let account of accounts; let i=index" (click)="onClickRow(account.accountNumber)">
-      <td>{{ i + 1 }}</td>
-      <td>{{ account.accountNumber }}</td>
-      <td>{{ account.money }}</td>
-      <td>{{ account.currency }}</td>
-      <td>{{ account.ownerName }}</td>
+    <tr *ngFor="let account of accounts; let i=index">
+      <td (click)="onClickField(account.accountNumber)">{{ i + 1 }} </td>
+      <td (click)="onClickField(account.accountNumber)">{{ account.accountNumber }}</td>
+      <td (click)="onClickField(account.accountNumber)">{{ account.money }}</td>
+      <td (click)="onClickField(account.accountNumber)">{{ account.currency }}</td>
+      <td (click)="onClickField(account.accountNumber)">{{ account.ownerName }}</td>
       <td><button type="submit" class="btn btn-warning" (click)="editAccount(account.accountNumber)">Edytuj</button></td>
       <td><button type="submit" class="btn btn-danger" (click)="deleteAccount(account.accountNumber)">Usuń</button></td>
     </tr>

@@ -12,8 +12,9 @@ export class AccountListComponent implements OnInit {
 
   accounts: Account[];
 
-  constructor(private accountService: AccountService, private router: Router) {
-  }
+  constructor(
+    private accountService: AccountService,
+    private router: Router) {}
 
   ngOnInit() {
     this.accountService.getAllAccounts().subscribe(data => {
@@ -21,18 +22,20 @@ export class AccountListComponent implements OnInit {
     });
   }
 
-  onClickRow(accountNumber: string) {
-    console.log("onclickrow dziala " + accountNumber);
+  onClickField(accountNumber: string) {
+    console.log("onClickField dziala " + accountNumber);
     this.router.navigate(['/transferdetails/' + accountNumber]);
   }
 
   editAccount(accountNumber: string) {
     console.log("edit " + accountNumber);
+    this.router.navigate(['/edit-account/' + accountNumber]);
   }
 
   deleteAccount(accountNumber: string) {
     console.log("delete " + accountNumber);
     this.accountService.delete(accountNumber);
+    window.location.reload();
   }
 
 }

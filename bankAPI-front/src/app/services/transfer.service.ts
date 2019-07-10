@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Transfer } from '../models/transfer';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TransferService {
@@ -14,7 +15,9 @@ export class TransferService {
     this.headersObject.append('Authorization', 'Basic ' + btoa('admin1:password1'));
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router) { }
 
   public getTransfersByAccountNumber(accountNumber: string): Observable<Transfer[]> {
     this.prepareHeader();
@@ -25,7 +28,8 @@ export class TransferService {
   public makeTransfer(accountNumberFrom: string, accountNumberTo: string, money: number) {
     this.prepareHeader();
 
-    return this.http.put('api/accounts/transfer/' + accountNumberFrom + '/' + accountNumberTo + '/' + money,
+    this.http.put('api/accounts/transfer/' + accountNumberFrom + '/' + accountNumberTo + '/' + money,
       {headers: this.headersObject}).subscribe(a => a);
+
   }
 }

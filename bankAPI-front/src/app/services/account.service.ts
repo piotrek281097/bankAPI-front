@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Account } from '../models/account';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AccountService {
@@ -15,7 +16,7 @@ export class AccountService {
     this.headersObject.append('Authorization', 'Basic ' + btoa('admin1:password1'));
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.accountsUrl = 'http://localhost:8081/api/accounts/';
   }
 

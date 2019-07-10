@@ -41,5 +41,7 @@ export class TransferFormComponent implements OnInit {
       console.log(this.transferForm.value.money);
 
       this.transferService.makeTransfer(this.accountNumberFrom, this.accountNumberTo, this.money);
+
+      window.location.reload();
   }
 }

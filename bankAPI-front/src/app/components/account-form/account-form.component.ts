@@ -22,7 +22,8 @@ export class AccountFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private accountService: AccountService) { }
+    private accountService: AccountService,
+    private router: Router) { }
 
   ngOnInit() {
     this.accountForm = this.formBuilder.group({
@@ -48,6 +49,10 @@ export class AccountFormComponent implements OnInit {
       console.log(accountToAdd);
 
       this.accountService.save(accountToAdd);
+
+      setTimeout( () => {
+        this.router.navigate(['/accounts/']);
+      }, 1000);
   }
 }
 /*
