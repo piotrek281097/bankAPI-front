@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { AccountService } from 'src/app/services/account.service';
 import { Account } from 'src/app/models/account';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class EditAccountFormComponent implements OnInit {
   money: number;
   currency: string;
   ownerName: string;
-  moneyUpdatedAccount: number;
+  accountReadFromDatabase: Account;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,6 +30,19 @@ export class EditAccountFormComponent implements OnInit {
   ngOnInit() {
     this.accountNumber = this.route.snapshot.paramMap.get('accountNumber');
     console.log("edit component " + this.accountNumber);
+
+    this.accountService.findByNumber(this.accountNumber).subscribe(data => {
+      this.accountReadFromDatabase = data;
+    });
+
+    /*
+    setTimeout( () => {
+      this.moneyUpdatedAccount = this.accountReadFromDatabase[0].money;
+      this.currencyUpdatedAccount = this.accountReadFromDatabase[0].currency;
+      this.ownerNameUpdatedAccount = this.accountReadFromDatabase[0].ownerName;
+
+    }, 1000);
+    */
 
     this.accountEditForm = this.formBuilder.group({
       money: ['', [Validators.required ]],
@@ -50,6 +64,7 @@ export class EditAccountFormComponent implements OnInit {
       accountToUpdate.ownerName = this.accountEditForm.value.ownerName;
       console.log(accountToUpdate);
 
+      this.accountService.updateAccount(this.accountNumber, accountToUpdate);
 
       // this.accountService.save(accountToUpdate);
 
@@ -57,6 +72,10 @@ export class EditAccountFormComponent implements OnInit {
         this.router.navigate(['/accounts/']);
       }, 1000);
 
+  }
+
+  cancel() {
+    this.router.navigate(['/accounts/']);
   }
 }
 
