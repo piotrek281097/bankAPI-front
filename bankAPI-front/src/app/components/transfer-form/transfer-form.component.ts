@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { TransferService } from 'src/app/services/transfer.service';
 import { Transfer } from 'src/app/models/transfer';
@@ -21,7 +21,8 @@ export class TransferFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private transferService: TransferService) { }
+    private transferService: TransferService,
+    private router: Router) { }
 
   ngOnInit() {
     this.transferForm = this.formBuilder.group({
@@ -43,5 +44,9 @@ export class TransferFormComponent implements OnInit {
       this.transferService.makeTransfer(this.accountNumberFrom, this.accountNumberTo, this.money);
 
       window.location.reload();
+  }
+
+  cancel() {
+    this.router.navigate(['/home/']);
   }
 }

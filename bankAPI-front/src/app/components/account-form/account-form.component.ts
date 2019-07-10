@@ -36,7 +36,7 @@ export class AccountFormComponent implements OnInit {
 
 
   onSubmit() {
-      let accountToAdd: Account = new Account();
+      const accountToAdd: Account = new Account();
 
       console.log(this.accountForm.value.accountNumber);
       accountToAdd.accountNumber = this.accountForm.value.accountNumber;
@@ -48,11 +48,15 @@ export class AccountFormComponent implements OnInit {
       accountToAdd.ownerName = this.accountForm.value.ownerName;
       console.log(accountToAdd);
 
-      this.accountService.save(accountToAdd);
+      //this.accountService.save(accountToAdd);
 
       setTimeout( () => {
         this.router.navigate(['/accounts/']);
       }, 1000);
+  }
+
+  cancel() {
+    this.router.navigate(['/home/']);
   }
 }
 /*
