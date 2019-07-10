@@ -4,8 +4,16 @@ import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 import { Account } from 'src/app/models/account';
 import {ToastrService} from 'ngx-toastr';
+import {ErrorStateMatcher} from '@angular/material/core';
 
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import {FormBuilder, NgForm, FormGroup, Validators, FormControl, FormGroupDirective} from '@angular/forms';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-account-form',
@@ -16,19 +24,26 @@ export class AccountFormComponent implements OnInit {
 
   accountForm: FormGroup;
   accountNumber: string;
-  money: number;
-  currency: string;
-  ownerName: string;
+  submitted = false;
+
+  matcher = new MyErrorStateMatcher();
+
+  FormControl = new FormControl('', [
+    Validators.required,
+  ]);
+
+
 
   constructor(
     private formBuilder: FormBuilder,
     private accountService: AccountService,
-    private router: Router) { }
+    private router: Router,
+    private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.accountForm = this.formBuilder.group({
-      accountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26)]],
-      money: ['', [Validators.required ]],
+      accountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26), Validators.pattern('^[0-9]*$')]],
+      money: ['', [Validators.required, Validators.pattern('^[0-9.]*$') ]],
       currency: ['', [Validators.pattern('[A-Z][A-Z][A-Z]')]],
       ownerName: ['', [Validators.required, Validators.maxLength(50)]]
     });
@@ -48,11 +63,19 @@ export class AccountFormComponent implements OnInit {
       accountToAdd.ownerName = this.accountForm.value.ownerName;
       console.log(accountToAdd);
 
-      //this.accountService.save(accountToAdd);
 
-      setTimeout( () => {
-        this.router.navigate(['/accounts/']);
-      }, 1000);
+      if (!this.accountForm.invalid) {
+        this.accountService.save(accountToAdd);
+
+        this.toastrService.info('Dodano rachunek');
+
+        setTimeout( () => {
+          this.router.navigate(['/accounts/']);
+        }, 1000);
+      } else {
+        this.toastrService.error('BŁĄD! Nieprawidłowe dane. Nie dodano rachunku.');
+      }
+
   }
 
   cancel() {

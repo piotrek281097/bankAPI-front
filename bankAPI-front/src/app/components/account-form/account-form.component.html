@@ -1,28 +1,71 @@
 <div class="container">
   <h1>Formatka rachunku</h1>
-  <form [formGroup]="accountForm">
+  <form class="form" [formGroup]="accountForm">
 
-    <div class="form-group">
-      <label for="accountNumber">Numer rachunku</label>
-      <input type="text" class="form-control" id="accountNumber" formControlName="accountNumber">
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nr rachunku" formControlName="accountNumber" id="accountNumber" class="form-control"
+                [errorStateMatcher]="matcher">
+        <mat-error *ngIf="FormControl.hasError('required')">
+          Nr rachunku jest <strong>wymagany</strong> oraz musi składać się z <strong> 26 cyfr </strong>
+        </mat-error>
+    </mat-form-field>
+    <br><br>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Pieniądze" formControlName="money" id="money" class="form-control"
+                [errorStateMatcher]="matcher">
+        <mat-error *ngIf="FormControl.hasError('required')">
+          Pieniądze są <strong>wymagane</strong>, używamy <strong> przecinka</strong>
+        </mat-error>
+    </mat-form-field>
+    <br><br>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Waluta" formControlName="currency" id="currency" class="form-control"
+                [errorStateMatcher]="matcher">
+        <mat-error *ngIf="FormControl.hasError('required')">
+          Skrót waluty jest<strong> wymagany </strong> oraz musi składać się z <strong> 3 drukowanych liter</strong>
+        </mat-error>
+    </mat-form-field>
+    <br><br>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Właściciel rachunku" formControlName="ownerName" id="ownerName" class="form-control"
+                [errorStateMatcher]="matcher">
+        <mat-error *ngIf="FormControl.hasError('required')">
+          Właściciel jest <strong>wymagany</strong> oraz musi mieć mniej niż <strong>50 znaków</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <br><br><br><br>
+
+
+    <!-- <div class="form-group">
+      <label for="moneyValidation">Pieniądze</label>
+      <input type="text" class="form-control" id="moneyValidation" formControlName="money" required>
+      <div class="valid-feedback">
+          Looks good!
+        </div>
     </div>
 
     <div class="form-group">
-      <label for="money">Pieniądze</label>
-      <input type="text" class="form-control" id="money" formControlName="money">
+      <label for="currencyValidation">Waluta</label>
+      <input type="text" class="form-control" id="currencyValidation" formControlName="currency">
+      <div class="invalid-feedback">
+          Please choose a username.
+      </div>
     </div>
 
     <div class="form-group">
-      <label for="currency">Waluta</label>
-      <input type="text" class="form-control" id="currency" formControlName="currency">
-    </div>
-
-    <div class="form-group">
-      <label for="ownerName">Właściciel rachunku</label>
-      <input type="text" class="form-control" id="ownerName" formControlName="ownerName">
-    </div>
+      <label for="ownerNameValidation">Właściciel rachunku</label>
+      <input type="text" class="form-control" id="ownerNameValidation" formControlName="ownerName">
+      <div class="invalid-feedback">
+          Please choose a username.
+      </div>
+    </div> -->
 
     <button type="submit" class="btn btn-success" (click)="onSubmit()">Dodaj rachunek</button>
-    <button type="submit" class="btn btn-danger" (click)="cancel()">Powrót do strony głównej</button>
+    <button type="submit" class="btn btn-danger" (click)="cancel()" >Powrót do strony głównej</button>
   </form>
+
+
+
+
 </div>

@@ -13,6 +13,23 @@ import { TransferFormComponent } from './components/transfer-form/transfer-form.
 import { TransferService } from './services/transfer.service';
 import { TransferDetailsComponent } from './components/transfer-details/transfer-details.component';
 import { EditAccountFormComponent } from './components/edit-account-form/edit-account-form.component';
+import {
+  MatMenuModule,
+  MatIconModule,
+  MatTableModule
+} from "@angular/material";
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule
+} from "@angular/platform-browser/animations";
+import { MatInputModule } from "@angular/material/input";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSelectModule } from "@angular/material/select";
+import { MatCardModule } from "@angular/material/card";
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 @NgModule({
@@ -33,6 +50,24 @@ import { EditAccountFormComponent } from './components/edit-account-form/edit-ac
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    MatMenuModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCardModule,
+    NoopAnimationsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      progressBar: true,
+      extendedTimeOut: 2000,
+      easeTime: 500,
+      resetTimeoutOnDuplicate: true
+    })
   ],
   providers: [AccountService, TransferService],
   bootstrap: [AppComponent]
