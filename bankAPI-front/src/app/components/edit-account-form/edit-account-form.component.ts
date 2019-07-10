@@ -1,10 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, NgForm} from '@angular/forms';
 import { AccountService } from 'src/app/services/account.service';
 import { Account } from 'src/app/models/account';
 import { Observable } from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
+import {ErrorStateMatcher} from '@angular/material/core';
 
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-edit-account-form',
@@ -20,11 +28,18 @@ export class EditAccountFormComponent implements OnInit {
   ownerName: string;
   accountReadFromDatabase: Account;
 
+  matcher = new MyErrorStateMatcher();
+
+  FormControl = new FormControl('', [
+    Validators.required,
+  ]);
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -45,8 +60,8 @@ export class EditAccountFormComponent implements OnInit {
     */
 
     this.accountEditForm = this.formBuilder.group({
-      money: ['', [Validators.required ]],
-      currency: ['', [Validators.pattern('[A-Z][A-Z][A-Z]')]],
+      money: ['', [Validators.required, Validators.pattern('^[0-9.]*$') ]],
+      currency: ['', [Validators.required, Validators.pattern('[A-Z][A-Z][A-Z]')]],
       ownerName: ['', [Validators.required, Validators.maxLength(50)]]
     });
   }
@@ -68,9 +83,19 @@ export class EditAccountFormComponent implements OnInit {
 
       // this.accountService.save(accountToUpdate);
 
-      setTimeout( () => {
-        this.router.navigate(['/accounts/']);
-      }, 1000);
+      if (!this.accountEditForm.invalid) {
+        this.accountService.save(accountToUpdate);
+
+        this.toastrService.success('Edytowano rachunek');
+
+        setTimeout( () => {
+          this.router.navigate(['/accounts/']);
+        }, 1000);
+      } else {
+        this.toastrService.error('BŁĄD! Nieprawidłowe dane. Nie edytowano rachunku.');
+      }
+
+
 
   }
 

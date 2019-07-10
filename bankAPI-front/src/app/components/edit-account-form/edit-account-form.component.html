@@ -4,7 +4,34 @@
 
       <h3>Nr rachunku:   <span class="badge badge-secondary"> {{ accountNumber }}</span></h3>
 
-      <div class="form-group">
+     <mat-form-field class="example-full-width">
+          <label for="money">Pieniądze</label>
+          <input matInput [(ngModel)] = 'accountReadFromDatabase.money' formControlName="money" id="money" class="form-control"
+                  [errorStateMatcher]="matcher">
+          <mat-error *ngIf="FormControl.hasError('required')">
+              Pieniądze są <strong>wymagane</strong>, używamy <strong> kropki</strong>
+          </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+          <label for="currency">Waluta</label>
+          <input matInput [(ngModel)] = 'accountReadFromDatabase.currency' formControlName="currency" id="currency" class="form-control"
+                  [errorStateMatcher]="matcher">
+          <mat-error *ngIf="FormControl.hasError('required')">
+              Skrót waluty jest<strong> wymagany </strong> oraz musi składać się z <strong> 3 drukowanych liter</strong>
+          </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+          <label for="ownerName">Waluta</label>
+          <input matInput [(ngModel)] = 'accountReadFromDatabase.ownerName' formControlName="ownerName" id="ownerName" class="form-control"
+                  [errorStateMatcher]="matcher">
+          <mat-error *ngIf="FormControl.hasError('required')">
+              Właściciel jest <strong>wymagany</strong> oraz musi mieć mniej niż <strong>50 znaków</strong>
+          </mat-error>
+      </mat-form-field>
+
+      <!-- <div class="form-group">
         <label for="money">Pieniądze</label>
         <input type="text" [(ngModel)] = 'accountReadFromDatabase.money' class="form-control" id="money" formControlName="money">
       </div>
@@ -17,7 +44,7 @@
       <div class="form-group">
         <label for="ownerName">Właściciel rachunku</label>
         <input type="text" [(ngModel)] = 'accountReadFromDatabase.ownerName' class="form-control" id="ownerName" formControlName="ownerName">
-      </div>
+      </div> -->
 
       <button type="submit" class="btn btn-success" (click)="onSubmit()">Zapisz zmiany</button>
       <button type="submit" class="btn btn-danger" (click)="cancel()">Anuluj</button>
