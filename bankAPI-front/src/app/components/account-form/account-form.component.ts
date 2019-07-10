@@ -44,7 +44,7 @@ export class AccountFormComponent implements OnInit {
     this.accountForm = this.formBuilder.group({
       accountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26), Validators.pattern('^[0-9]*$')]],
       money: ['', [Validators.required, Validators.pattern('^[0-9.]*$') ]],
-      currency: ['', [Validators.pattern('[A-Z][A-Z][A-Z]')]],
+      currency: ['', [Validators.required, Validators.pattern('[A-Z][A-Z][A-Z]')]],
       ownerName: ['', [Validators.required, Validators.maxLength(50)]]
     });
   }
@@ -67,7 +67,7 @@ export class AccountFormComponent implements OnInit {
       if (!this.accountForm.invalid) {
         this.accountService.save(accountToAdd);
 
-        this.toastrService.info('Dodano rachunek');
+        this.toastrService.success('Dodano rachunek');
 
         setTimeout( () => {
           this.router.navigate(['/accounts/']);

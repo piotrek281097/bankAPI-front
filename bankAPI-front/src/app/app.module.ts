@@ -67,7 +67,7 @@ import { ToastrModule } from 'ngx-toastr';
       extendedTimeOut: 2000,
       easeTime: 500,
       resetTimeoutOnDuplicate: true
-    })
+    }),
   ],
   providers: [AccountService, TransferService],
   bootstrap: [AppComponent]
