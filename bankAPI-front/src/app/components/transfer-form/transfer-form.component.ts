@@ -4,7 +4,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TransferService } from 'src/app/services/transfer.service';
 import { Transfer } from 'src/app/models/transfer';
 
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+import {FormBuilder, NgForm, FormGroup, Validators, FormControl, FormGroupDirective} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-transfer-form',
@@ -19,16 +30,23 @@ export class TransferFormComponent implements OnInit {
   accountNumberTo: string;
   money: number;
 
+  matcher = new MyErrorStateMatcher();
+
+  FormControl = new FormControl('', [
+    Validators.required,
+  ]);
+
   constructor(
     private formBuilder: FormBuilder,
     private transferService: TransferService,
-    private router: Router) { }
+    private router: Router,
+    private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.transferForm = this.formBuilder.group({
-      firstAccountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26)]],
-      secondAccountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26)]],
-      money: ['', [Validators.required ]],
+      firstAccountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26), Validators.pattern('^[0-9]*$')]],
+      secondAccountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26), Validators.pattern('^[0-9]*$')]],
+      money: ['', [Validators.required, Validators.pattern('^[0-9.]*$') ]],
     });
   }
 
@@ -41,10 +59,17 @@ export class TransferFormComponent implements OnInit {
       this.money = this.transferForm.value.money;
       console.log(this.transferForm.value.money);
 
-      this.transferService.makeTransfer(this.accountNumberFrom, this.accountNumberTo, this.money);
+      if (!this.transferForm.invalid) {
+        this.transferService.makeTransfer(this.accountNumberFrom, this.accountNumberTo, this.money);
+        setTimeout( () => {
+          window.location.reload();
+        }, 3000);
+      } else {
+        this.toastrService.error('BŁĄD! Nieprawidłowe dane. Nie można wykonać takiego przelewu.');
+      }
 
-      window.location.reload();
   }
+
 
   cancel() {
     this.router.navigate(['/home/']);

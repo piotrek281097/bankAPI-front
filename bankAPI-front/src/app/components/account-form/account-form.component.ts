@@ -66,14 +66,8 @@ export class AccountFormComponent implements OnInit {
 
       if (!this.accountForm.invalid) {
         this.accountService.save(accountToAdd);
-
-        this.toastrService.success('Dodano rachunek');
-
-        setTimeout( () => {
-          this.router.navigate(['/accounts/']);
-        }, 1000);
       } else {
-        this.toastrService.error('BŁĄD! Nieprawidłowe dane. Nie dodano rachunku.');
+        this.toastrService.error('BŁĄD! Nieprawidłowe dane. Nie można dodać takiego rachunku.');
       }
 
   }

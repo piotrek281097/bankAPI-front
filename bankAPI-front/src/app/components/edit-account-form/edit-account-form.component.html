@@ -23,7 +23,7 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-          <label for="ownerName">Waluta</label>
+          <label for="ownerName">Właściciel</label>
           <input matInput [(ngModel)] = 'accountReadFromDatabase.ownerName' formControlName="ownerName" id="ownerName" class="form-control"
                   [errorStateMatcher]="matcher">
           <mat-error *ngIf="FormControl.hasError('required')">
@@ -31,20 +31,7 @@
           </mat-error>
       </mat-form-field>
 
-      <!-- <div class="form-group">
-        <label for="money">Pieniądze</label>
-        <input type="text" [(ngModel)] = 'accountReadFromDatabase.money' class="form-control" id="money" formControlName="money">
-      </div>
-
-      <div class="form-group">
-        <label for="currency">Waluta</label>
-        <input type="text" [(ngModel)] = 'accountReadFromDatabase.currency' class="form-control" id="currency" formControlName="currency">
-      </div>
-
-      <div class="form-group">
-        <label for="ownerName">Właściciel rachunku</label>
-        <input type="text" [(ngModel)] = 'accountReadFromDatabase.ownerName' class="form-control" id="ownerName" formControlName="ownerName">
-      </div> -->
+      <br><br>
 
       <button type="submit" class="btn btn-success" (click)="onSubmit()">Zapisz zmiany</button>
       <button type="submit" class="btn btn-danger" (click)="cancel()">Anuluj</button>

@@ -79,20 +79,11 @@ export class EditAccountFormComponent implements OnInit {
       accountToUpdate.ownerName = this.accountEditForm.value.ownerName;
       console.log(accountToUpdate);
 
-      this.accountService.updateAccount(this.accountNumber, accountToUpdate);
-
-      // this.accountService.save(accountToUpdate);
-
       if (!this.accountEditForm.invalid) {
-        this.accountService.save(accountToUpdate);
-
-        this.toastrService.success('Edytowano rachunek');
-
-        setTimeout( () => {
-          this.router.navigate(['/accounts/']);
-        }, 1000);
+        console.log("Weszlo w updateaccount")
+        this.accountService.updateAccount(this.accountNumber, accountToUpdate);
       } else {
-        this.toastrService.error('BŁĄD! Nieprawidłowe dane. Nie edytowano rachunku.');
+        this.toastrService.error('BŁĄD! Nieprawidłowe dane. Nie można edytować rachunku.');
       }
 
 

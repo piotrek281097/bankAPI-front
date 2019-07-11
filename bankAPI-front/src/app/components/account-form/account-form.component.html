@@ -1,7 +1,6 @@
 <div class="container">
   <h1>Formatka rachunku</h1>
   <form class="form" [formGroup]="accountForm">
-
     <mat-form-field class="example-full-width">
         <input matInput placeholder="Nr rachunku" formControlName="accountNumber" id="accountNumber" class="form-control"
                 [errorStateMatcher]="matcher">
@@ -9,7 +8,9 @@
           Nr rachunku jest <strong>wymagany</strong> oraz musi składać się z <strong> 26 cyfr </strong>
         </mat-error>
     </mat-form-field>
+
     <br><br>
+
     <mat-form-field class="example-full-width">
         <input matInput placeholder="Pieniądze" formControlName="money" id="money" class="form-control"
                 [errorStateMatcher]="matcher">
@@ -17,7 +18,9 @@
           Pieniądze są <strong>wymagane</strong>, używamy <strong> kropki</strong>
         </mat-error>
     </mat-form-field>
+
     <br><br>
+
     <mat-form-field class="example-full-width">
         <input matInput placeholder="Waluta" formControlName="currency" id="currency" class="form-control"
                 [errorStateMatcher]="matcher">
@@ -25,7 +28,9 @@
           Skrót waluty jest<strong> wymagany </strong> oraz musi składać się z <strong> 3 drukowanych liter</strong>
         </mat-error>
     </mat-form-field>
+
     <br><br>
+
     <mat-form-field class="example-full-width">
         <input matInput placeholder="Właściciel rachunku" formControlName="ownerName" id="ownerName" class="form-control"
                 [errorStateMatcher]="matcher">
@@ -34,8 +39,7 @@
         </mat-error>
     </mat-form-field>
 
-    <br><br><br><br>
-
+    <br><br>
 
     <!-- <div class="form-group">
       <label for="moneyValidation">Pieniądze</label>

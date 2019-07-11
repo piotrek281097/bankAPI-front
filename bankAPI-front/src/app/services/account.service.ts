@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Account } from '../models/account';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable()
 export class AccountService {
@@ -12,11 +13,14 @@ export class AccountService {
 
   prepareHeader() {
     this.headersObject = new HttpHeaders();
-    this.headersObject.append('Content-Type', 'application/json');
-    this.headersObject.append('Authorization', 'Basic ' + btoa('admin1:password1'));
+    this.headersObject = this.headersObject.append('Content-Type', 'application/json');
+    this.headersObject = this.headersObject.append('Authorization', 'Basic ' + btoa('admin1:password1'));
   }
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private toastrService: ToastrService) {
     this.accountsUrl = 'http://localhost:8081/api/accounts/';
   }
 
@@ -29,7 +33,24 @@ export class AccountService {
   public save(account: Account) {
     this.prepareHeader();
 
-    return this.http.post('/api/accounts/add', account, {headers: this.headersObject}).subscribe(a => a);
+    return this.http.post('/api/accounts/add', account, {headers: this.headersObject}).toPromise()
+    .then((res: Response) => {
+      this.toastrService.success('Dodano rachunek');
+      setTimeout( () => {
+        this.router.navigate(['/accounts/']);
+      }, 3000);
+    }
+    )
+    .catch(error => {
+      if (error instanceof HttpErrorResponse && (error.status === 500 )) {
+        if (error.status === 500) {
+          this.toastrService.error('Nie znaleziono takiej waluty! Nie dodano rachunku');
+        }
+      }
+    })
+    .catch((res: Response) => {
+      this.toastrService.success('Nieznany błąd! Nie wykonano przelewu');
+    })
   }
 
   public delete(accountNumber: string) {
@@ -47,7 +68,24 @@ export class AccountService {
   public updateAccount(accountNumber: string, account: Account) {
       this.prepareHeader();
 
-      return this.http.put('/api/accounts/update/' + accountNumber, account, {headers: this.headersObject}).subscribe();
+      return this.http.put('/api/accounts/update/' + accountNumber, account, {headers: this.headersObject}).toPromise()
+      .then((res: Response) => {
+        this.toastrService.success('Edytowano rachunek');
+        setTimeout( () => {
+          this.router.navigate(['/accounts/']);
+        }, 3000);
+      }
+      )
+      .catch(error => {
+        if (error instanceof HttpErrorResponse && (error.status === 500 )) {
+          if (error.status === 500) {
+            this.toastrService.error('Nie znaleziono takiej waluty! Nie edytowano rachunku');
+          }
+        }
+      })
+      .catch((res: Response) => {
+        this.toastrService.success('Nieznany błąd! Nie edytowano rachunku');
+      })
   }
 
 }
