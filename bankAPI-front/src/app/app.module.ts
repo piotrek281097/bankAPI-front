@@ -29,6 +29,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
 import { MatCardModule } from "@angular/material/card";
 import { ToastrModule } from 'ngx-toastr';
+import { NgHttpLoaderModule } from 'ng-http-loader';
 
 
 
@@ -61,6 +62,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatCardModule,
     NoopAnimationsModule,
     BrowserAnimationsModule,
+    NgHttpLoaderModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,
       progressBar: true,

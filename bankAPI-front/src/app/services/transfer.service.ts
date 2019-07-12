@@ -31,25 +31,29 @@ export class TransferService {
   public makeTransfer(accountNumberFrom: string, accountNumberTo: string, money: number) {
     this.prepareHeader();
 
-    this.http.put('api/accounts/transfer/' + accountNumberFrom + '/' + accountNumberTo + '/' + money,
-      {headers: this.headersObject}).toPromise()
-      .then((res: Response) => {
-        this.toastrService.success('Wykonano przelew');
-      }
-      )
-      .catch(error => {
-        if (error instanceof HttpErrorResponse && (error.status === 404 || error.status === 409 || error.status === 400)) {
-          if (error.status === 404) {
-            this.toastrService.error('Nie znaleziono nr konta! Nie wykonano przelewu');
-          } else if (error.status === 409) {
-            this.toastrService.error('Za mało środków na koncie! Nie wykonano przelewu');
-          } else if (error.status === 400) {
-            this.toastrService.error('BŁĄD! Nieznany błąd. Sprawdź jeszcze raz dane. Nie wykonano przelewu');
-          }
+    if (accountNumberFrom === accountNumberTo) {
+      this.toastrService.error('BŁĄD! Nr rachunku nadawcy i odbiorcy nie może być taki sam.');
+    } else {
+      this.http.put('api/accounts/transfer/' + accountNumberFrom + '/' + accountNumberTo + '/' + money,{headers: this.headersObject})
+      .toPromise()
+        .then((res: Response) => {
+          this.toastrService.success('Wykonano przelew');
         }
-      })
-      .catch((res: Response) => {
-        this.toastrService.success('Nieznany błąd! Nie wykonano przelewu');
-      });
+        )
+        .catch(error => {
+          if (error instanceof HttpErrorResponse && (error.status === 404 || error.status === 409 || error.status === 400)) {
+            if (error.status === 404) {
+              this.toastrService.error('Nie znaleziono nr konta! Nie wykonano przelewu');
+            } else if (error.status === 409) {
+              this.toastrService.error('Za mało środków na koncie! Nie wykonano przelewu');
+            } else if (error.status === 400) {
+              this.toastrService.error('BŁĄD! Nieznany błąd. Sprawdź jeszcze raz dane. Nie wykonano przelewu');
+            }
+          }
+        })
+        .catch((res: Response) => {
+          this.toastrService.success('Nieznany błąd! Nie wykonano przelewu');
+        });
+      }
   }
 }
