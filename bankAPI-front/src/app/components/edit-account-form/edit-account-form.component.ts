@@ -80,7 +80,6 @@ export class EditAccountFormComponent implements OnInit {
       console.log(accountToUpdate);
 
       if (!this.accountEditForm.invalid) {
-        console.log("Weszlo w updateaccount")
         this.accountService.updateAccount(this.accountNumber, accountToUpdate);
       } else {
         this.toastrService.error('BŁĄD! Nieprawidłowe dane. Nie można edytować rachunku.');
