@@ -38,11 +38,13 @@ export class TransferService {
       }
       )
       .catch(error => {
-        if (error instanceof HttpErrorResponse && (error.status === 404 || error.status === 409)) {
+        if (error instanceof HttpErrorResponse && (error.status === 404 || error.status === 409 || error.status === 400)) {
           if (error.status === 404) {
             this.toastrService.error('Nie znaleziono nr konta! Nie wykonano przelewu');
           } else if (error.status === 409) {
             this.toastrService.error('Za mało środków na koncie! Nie wykonano przelewu');
+          } else if (error.status === 400) {
+            this.toastrService.error('BŁĄD! Nieznany błąd. Sprawdź jeszcze raz dane. Nie wykonano przelewu');
           }
         }
       })

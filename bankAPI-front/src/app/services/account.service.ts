@@ -42,14 +42,18 @@ export class AccountService {
     }
     )
     .catch(error => {
-      if (error instanceof HttpErrorResponse && (error.status === 500 )) {
-        if (error.status === 500) {
+      if (error instanceof HttpErrorResponse && (error.status === 404 || error.status === 409 || error.status === 400)) {
+        if (error.status === 409) {
+          this.toastrService.error('BŁĄD! Rachunek o takim numerze już istnieje! Nie dodano rachunku');
+        } else if (error.status === 404) {
           this.toastrService.error('Nie znaleziono takiej waluty! Nie dodano rachunku');
+        } else if (error.status === 400) {
+          this.toastrService.error('BŁĄD! Nieznany błąd. Sprawdź jeszcze raz dane. Nie dodano rachunku');
         }
       }
     })
     .catch((res: Response) => {
-      this.toastrService.success('Nieznany błąd! Nie wykonano przelewu');
+      this.toastrService.success('Nieznany błąd! Nie dodano rachunku');
     })
   }
 
