@@ -16,7 +16,8 @@ cache:
   directories:
     - ./node_modules
 
-before_install: gem install bundler
+before_install:
+  - gem install bundler
 
 install:
   - npm install
