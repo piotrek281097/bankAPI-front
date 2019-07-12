@@ -16,5 +16,5 @@ before_script:
 script:
   - ng lint
   - ng test
-  - ng e2e
+  - ng e2
   - yarn build --prod --base-href https://github.com/piotrek281097/bankAPI-front
