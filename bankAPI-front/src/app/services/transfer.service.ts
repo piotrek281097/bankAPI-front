@@ -50,6 +50,6 @@ export class TransferService {
       })
       .catch((res: Response) => {
         this.toastrService.success('Nieznany błąd! Nie wykonano przelewu');
-      })
+      });
   }
 }

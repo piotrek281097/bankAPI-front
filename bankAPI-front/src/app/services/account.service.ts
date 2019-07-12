@@ -54,7 +54,7 @@ export class AccountService {
     })
     .catch((res: Response) => {
       this.toastrService.success('Nieznany błąd! Nie dodano rachunku');
-    })
+    });
   }
 
   public delete(accountNumber: string) {
@@ -89,7 +89,7 @@ export class AccountService {
       })
       .catch((res: Response) => {
         this.toastrService.success('Nieznany błąd! Nie edytowano rachunku');
-      })
+      });
   }
 
 }
