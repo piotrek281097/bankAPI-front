@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "10.16.0"
+sudo: true
+
+addons:
+  chrome: stable
+
+branches:
+  only:
+    - master
+
+before_script:
+  - npm install -g @angular/cli
+
+script:
+  - ng lint
+  - ng test
+  - ng e2e
+  - yarn build --prod --base-href https://github.com/piotrek281097/bankAPI-front
