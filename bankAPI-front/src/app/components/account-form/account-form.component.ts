@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 import { Account } from 'src/app/models/account';
@@ -38,7 +37,8 @@ export class AccountFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private accountService: AccountService,
     private router: Router,
-    private toastrService: ToastrService) { }
+    private toastrService: ToastrService
+  ) { }
 
   ngOnInit() {
     this.accountForm = this.formBuilder.group({
@@ -76,18 +76,3 @@ export class AccountFormComponent implements OnInit {
     this.router.navigate(['/home/']);
   }
 }
-/*
-addAccount(): void {
-  const accountToAdd = new Account(
-    this.accountNumber,
-    this.money,
-    this.currency,
-    this.ownerName
-  );
-
-  console.log('addAccount');
-
-  this.accountService.save(accountToAdd);
-  }
-}
-*/

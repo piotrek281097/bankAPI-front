@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { TransferService } from 'src/app/services/transfer.service';
 import { Transfer } from 'src/app/models/transfer';
 import { Account } from 'src/app/models/account';

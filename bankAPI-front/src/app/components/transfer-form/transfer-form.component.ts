@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
+import { Router } from '@angular/router';
 import { TransferService } from 'src/app/services/transfer.service';
-import { Transfer } from 'src/app/models/transfer';
-
 import {ErrorStateMatcher} from '@angular/material/core';
-
 import {FormBuilder, NgForm, FormGroup, Validators, FormControl, FormGroupDirective} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
@@ -40,7 +36,8 @@ export class TransferFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private transferService: TransferService,
     private router: Router,
-    private toastrService: ToastrService) { }
+    private toastrService: ToastrService
+  ) { }
 
   ngOnInit() {
     this.transferForm = this.formBuilder.group({
