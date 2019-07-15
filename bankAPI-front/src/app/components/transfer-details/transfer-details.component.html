@@ -1,15 +1,15 @@
 <h1>Szczegóły konta</h1>
 <br>
 <h3>Numer rachunku: <span class="text-secondary"> {{ accountNumber }}</span></h3>
-<h3>Środki na koncie: <span class="text-secondary"> {{ accountReadFromDatabase.money }}</span></h3>
-<h3>Waluta: <span class="text-secondary"> {{ accountReadFromDatabase.currency }}</span></h3>
-<h3>Właściciel: <span class="text-secondary"> {{ accountReadFromDatabase.ownerName }}</span></h3>
+<h3>Środki na koncie: <span class="text-secondary"> {{ accountReadFromDatabase?.money }}</span></h3>
+<h3>Waluta: <span class="text-secondary"> {{ accountReadFromDatabase?.currency }}</span></h3>
+<h3>Właściciel: <span class="text-secondary"> {{ accountReadFromDatabase?.ownerName }}</span></h3>
 <br><br>
-<h2 *ngIf="transfersForOneAccountNumber.length > 0" >Przelewy dla konta nr: <span class="badge badge-secondary"> {{ accountNumber }}</span></h2>
-<h2 *ngIf="transfersForOneAccountNumber.length == 0" >Brak przelewów dla konta nr: <span class="badge badge-secondary"> {{ accountNumber }}</span></h2>
+<h2 *ngIf="conditionAreTransfers" >Przelewy dla konta nr: <span class="badge badge-secondary"> {{ accountNumber }}</span></h2>
+<h2 *ngIf="conditionAreTransfers == false" >Brak przelewów dla konta nr: <span class="badge badge-secondary"> {{ accountNumber }}</span></h2>
 <table class="table table-bordered table-striped">
   <thead class="thead-dark">
-    <tr *ngIf="transfersForOneAccountNumber.length > 0" >
+    <tr *ngIf="conditionAreTransfers" >
       <th scope="col">Nr</th>
       <th scope="col">Nr konta nadawcy</th>
       <th scope="col">Nr konta odbiorcy</th>
