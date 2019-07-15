@@ -4,7 +4,7 @@
 
       <h3>Nr rachunku:   <span class="badge badge-secondary"> {{ accountNumber }}</span></h3>
 
-     <mat-form-field class="example-full-width">
+     <mat-form-field *ngIf="isAccountFromDataBaseLoaded" class="example-full-width">
           <label for="money">Pieniądze</label>
           <input matInput [(ngModel)] = 'accountReadFromDatabase.money' formControlName="money" id="money" class="form-control"
                   [errorStateMatcher]="matcher">
@@ -13,7 +13,7 @@
           </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="example-full-width">
+      <mat-form-field *ngIf="isAccountFromDataBaseLoaded" class="example-full-width">
           <label for="currency">Waluta</label>
           <input matInput [(ngModel)] = 'accountReadFromDatabase.currency' formControlName="currency" id="currency" class="form-control"
                   [errorStateMatcher]="matcher">
@@ -22,7 +22,7 @@
           </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="example-full-width">
+      <mat-form-field *ngIf="isAccountFromDataBaseLoaded" class="example-full-width">
           <label for="ownerName">Właściciel</label>
           <input matInput [(ngModel)] = 'accountReadFromDatabase.ownerName' formControlName="ownerName" id="ownerName" class="form-control"
                   [errorStateMatcher]="matcher">

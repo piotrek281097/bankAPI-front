@@ -13,11 +13,13 @@ import { TransferFormComponent } from './components/transfer-form/transfer-form.
 import { TransferService } from './services/transfer.service';
 import { TransferDetailsComponent } from './components/transfer-details/transfer-details.component';
 import { EditAccountFormComponent } from './components/edit-account-form/edit-account-form.component';
+import {MatNativeDateModule} from '@angular/material/core';
+
 import {
   MatMenuModule,
   MatIconModule,
   MatTableModule,
-  MatDialog
+  MatDialog,
 } from "@angular/material";
 import {
   BrowserAnimationsModule,
@@ -36,6 +38,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +53,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 
   ],
   imports: [
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -65,6 +69,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatInputModule,
     MatSelectModule,
     MatCardModule,
+    MatNativeDateModule,
     NoopAnimationsModule,
     BrowserAnimationsModule,
     NgHttpLoaderModule.forRoot(),

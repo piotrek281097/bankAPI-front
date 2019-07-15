@@ -26,6 +26,7 @@ export class EditAccountFormComponent implements OnInit {
   currency: string;
   ownerName: string;
   accountReadFromDatabase: Account;
+  isAccountFromDataBaseLoaded: boolean = false;
 
   matcher = new MyErrorStateMatcher();
 
@@ -46,6 +47,7 @@ export class EditAccountFormComponent implements OnInit {
 
     this.accountService.findByNumber(this.accountNumber).subscribe(data => {
       this.accountReadFromDatabase = data;
+      this.isAccountFromDataBaseLoaded = true;
     });
 
     this.accountEditForm = this.formBuilder.group({

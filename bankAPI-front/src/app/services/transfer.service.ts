@@ -27,6 +27,16 @@ export class TransferService {
     return this.http.get<Transfer[]>('api/transfers/findByNumber/' + accountNumber, {headers: this.headersObject});
   }
 
+  public getTransfersOutByAccountNumber(accountNumber: string): Observable<Transfer[]> {
+    this.prepareHeader();
+    return this.http.get<Transfer[]>('api/transfersOut/findByNumber/' + accountNumber, {headers: this.headersObject});
+  }
+
+  public getTransfersInByAccountNumber(accountNumber: string): Observable<Transfer[]> {
+    this.prepareHeader();
+    return this.http.get<Transfer[]>('api/transfersIn/findByNumber/' + accountNumber, {headers: this.headersObject});
+  }
+
 
   public makeTransfer(accountNumberFrom: string, accountNumberTo: string, money: number) {
     this.prepareHeader();
@@ -37,7 +47,7 @@ export class TransferService {
       this.http.put('api/accounts/transfer/' + accountNumberFrom + '/' + accountNumberTo + '/' + money,{headers: this.headersObject})
       .toPromise()
         .then((res: Response) => {
-          this.toastrService.success('Wykonano przelew');
+          this.toastrService.success('Zlecono przelew');
         }
         )
         .catch(error => {
