@@ -14,7 +14,8 @@ export class AccountListComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private router: Router) {}
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.accountService.getAllAccounts().subscribe(data => {

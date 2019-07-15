@@ -51,8 +51,6 @@ export class TransferFormComponent implements OnInit {
 
 
   onSubmit() {
-
-
       this.accountNumberFrom = this.transferForm.value.firstAccountNumber;
       console.log(this.transferForm.value.firstAccountNumber);
       this.accountNumberTo = this.transferForm.value.secondAccountNumber;
@@ -60,20 +58,12 @@ export class TransferFormComponent implements OnInit {
       this.money = this.transferForm.value.money;
       console.log(this.transferForm.value.money);
 
-
       if (!this.transferForm.invalid) {
         this.confirmTransferDialogService.openConfirmTransferDialog(this.accountNumberFrom, this.accountNumberTo, this.money);
-        //this.transferService.makeTransfer(this.accountNumberFrom, this.accountNumberTo, this.money);
-        //setTimeout( () => {
-         // window.location.reload();
-        //}, 3000);
       } else {
         this.toastrService.error('BŁĄD! Nieprawidłowe dane. Nie można wykonać takiego przelewu.');
       }
-
-
   }
-
 
   cancel() {
     this.router.navigate(['/home/']);

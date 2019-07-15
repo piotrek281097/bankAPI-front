@@ -42,7 +42,6 @@ export class TransferDetailsComponent implements OnInit {
       if (this.transfersForOneAccountNumber.length > 0) {
         this.conditionAreTransfers = true;
       }
-
       this.transfersToShow = this.transfersForOneAccountNumber;
     });
 
@@ -59,27 +58,25 @@ export class TransferDetailsComponent implements OnInit {
         this.conditionAreTransfersIn = true;
       }
     });
-
-    this.transfersToShow = this.transfersForOneAccountNumber;
   }
 
   showAllTransfers() {
-    console.log("All");
-    this.titleTransfers = "Wszystkie";
+    console.log('All');
+    this.titleTransfers = 'Wszystkie';
     this.transfersToShow = this.transfersForOneAccountNumber;
     this.conditionAreTransfersToShow = this.conditionAreTransfersIn;
   }
 
   showOutTransfers() {
-    console.log("Out");
-    this.titleTransfers = "Wychodzące";
+    console.log('Out');
+    this.titleTransfers = 'Wychodzące';
     this.transfersToShow = this.transfersOut;
     this.conditionAreTransfers = this.conditionAreTransfersOut;
   }
 
   showInTransfers() {
-    console.log("In");
-    this.titleTransfers = "Przychodzące";
+    console.log('In');
+    this.titleTransfers = 'Przychodzące';
     this.transfersToShow = this.transfersIn;
     this.conditionAreTransfers = this.conditionAreTransfersIn;
   }

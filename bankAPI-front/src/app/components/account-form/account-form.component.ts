@@ -4,7 +4,6 @@ import { AccountService } from 'src/app/services/account.service';
 import { Account } from 'src/app/models/account';
 import {ToastrService} from 'ngx-toastr';
 import {ErrorStateMatcher} from '@angular/material/core';
-
 import {FormBuilder, NgForm, FormGroup, Validators, FormControl, FormGroupDirective} from '@angular/forms';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -13,7 +12,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
-
 @Component({
   selector: 'app-account-form',
   templateUrl: './account-form.component.html',
@@ -30,8 +28,6 @@ export class AccountFormComponent implements OnInit {
   FormControl = new FormControl('', [
     Validators.required,
   ]);
-
-
 
   constructor(
     private formBuilder: FormBuilder,
@@ -63,13 +59,11 @@ export class AccountFormComponent implements OnInit {
       accountToAdd.ownerName = this.accountForm.value.ownerName;
       console.log(accountToAdd);
 
-
       if (!this.accountForm.invalid) {
         this.accountService.save(accountToAdd);
       } else {
         this.toastrService.error('BŁĄD! Nieprawidłowe dane. Nie można dodać takiego rachunku.');
       }
-
   }
 
   cancel() {
