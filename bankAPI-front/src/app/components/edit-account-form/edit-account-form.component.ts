@@ -49,7 +49,7 @@ export class EditAccountFormComponent implements OnInit {
     });
 
     this.accountEditForm = this.formBuilder.group({
-      money: ['', [Validators.required, Validators.pattern('^[0-9.]*$') ]],
+      money: ['', [Validators.required, Validators.pattern('^[0-9]*([.][0-9]{1,2})?$') ]],
       currency: ['', [Validators.required, Validators.pattern('[A-Z][A-Z][A-Z]')]],
       ownerName: ['', [Validators.required, Validators.maxLength(50)]]
     });

@@ -45,7 +45,7 @@ export class TransferFormComponent implements OnInit {
     this.transferForm = this.formBuilder.group({
       firstAccountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26), Validators.pattern('^[0-9]*$')]],
       secondAccountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26), Validators.pattern('^[0-9]*$')]],
-      money: ['', [Validators.required, Validators.pattern('^[0-9.]*$') ]],
+      money: ['', [Validators.required, Validators.pattern('^[0-9]*([.][0-9]{1,2})?$') ]],
     });
   }
 

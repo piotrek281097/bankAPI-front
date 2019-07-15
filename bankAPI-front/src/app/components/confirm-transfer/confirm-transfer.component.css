@@ -3,4 +3,9 @@
 }
 .btn-danger {
   margin-left: 5px;
+  width: 50%;
+}
+
+.btn-success {
+  width: 50%;
 }

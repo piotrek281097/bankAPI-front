@@ -25,7 +25,7 @@
           <input matInput placeholder="Pieniądze" formControlName="money" id="money" class="form-control"
                   [errorStateMatcher]="matcher">
           <mat-error *ngIf="FormControl.hasError('required')">
-            Pieniądze są <strong>wymagane</strong>, używamy <strong> kropki</strong>
+              Pieniądze są <strong>wymagane</strong>, używamy <strong> kropki. </strong> Np. 100.00
           </mat-error>
       </mat-form-field>
 

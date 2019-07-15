@@ -14,7 +14,7 @@ export class ConfirmTransferComponent implements OnInit {
   moneyToTransfer: number;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data,
+    @Inject(MAT_DIALOG_DATA) protected data,
     private dialogRef: MatDialogRef<ConfirmTransferComponent>,
     private transferService: TransferService
   ) { }
