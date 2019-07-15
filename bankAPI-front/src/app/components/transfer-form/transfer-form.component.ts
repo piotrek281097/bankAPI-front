@@ -4,6 +4,7 @@ import { TransferService } from 'src/app/services/transfer.service';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {FormBuilder, NgForm, FormGroup, Validators, FormControl, FormGroupDirective} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmTransferDialogService } from 'src/app/services/confirm-transfer-dialog.service';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -36,7 +37,8 @@ export class TransferFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private transferService: TransferService,
     private router: Router,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private confirmTransferDialogService: ConfirmTransferDialogService
   ) { }
 
   ngOnInit() {
@@ -49,6 +51,8 @@ export class TransferFormComponent implements OnInit {
 
 
   onSubmit() {
+
+
       this.accountNumberFrom = this.transferForm.value.firstAccountNumber;
       console.log(this.transferForm.value.firstAccountNumber);
       this.accountNumberTo = this.transferForm.value.secondAccountNumber;
@@ -56,14 +60,17 @@ export class TransferFormComponent implements OnInit {
       this.money = this.transferForm.value.money;
       console.log(this.transferForm.value.money);
 
+
       if (!this.transferForm.invalid) {
-        this.transferService.makeTransfer(this.accountNumberFrom, this.accountNumberTo, this.money);
-        setTimeout( () => {
-          window.location.reload();
-        }, 3000);
+        this.confirmTransferDialogService.openConfirmTransferDialog(this.accountNumberFrom, this.accountNumberTo, this.money);
+        //this.transferService.makeTransfer(this.accountNumberFrom, this.accountNumberTo, this.money);
+        //setTimeout( () => {
+         // window.location.reload();
+        //}, 3000);
       } else {
         this.toastrService.error('BŁĄD! Nieprawidłowe dane. Nie można wykonać takiego przelewu.');
       }
+
 
   }
 

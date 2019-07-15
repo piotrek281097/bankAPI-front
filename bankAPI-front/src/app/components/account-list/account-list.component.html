@@ -15,7 +15,7 @@
     <tr *ngFor="let account of accounts; let i=index">
       <td (click)="onClickField(account.accountNumber)">{{ i + 1 }} </td>
       <td (click)="onClickField(account.accountNumber)">{{ account.accountNumber }}</td>
-      <td (click)="onClickField(account.accountNumber)">{{ account.money }}</td>
+      <td (click)="onClickField(account.accountNumber)">{{ account.money | number:'1.2-2' }}</td>
       <td (click)="onClickField(account.accountNumber)">{{ account.currency }}</td>
       <td (click)="onClickField(account.accountNumber)">{{ account.ownerName }}</td>
       <td><button type="submit" class="btn btn-warning" (click)="editAccount(account.accountNumber)">Edytuj</button></td>

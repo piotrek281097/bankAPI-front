@@ -16,7 +16,8 @@ import { EditAccountFormComponent } from './components/edit-account-form/edit-ac
 import {
   MatMenuModule,
   MatIconModule,
-  MatTableModule
+  MatTableModule,
+  MatDialog
 } from "@angular/material";
 import {
   BrowserAnimationsModule,
@@ -30,6 +31,8 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatCardModule } from "@angular/material/card";
 import { ToastrModule } from 'ngx-toastr';
 import { NgHttpLoaderModule } from 'ng-http-loader';
+import { ConfirmTransferComponent } from 'src/app/components/confirm-transfer/confirm-transfer.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -42,7 +45,8 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     AccountFormComponent,
     TransferFormComponent,
     TransferDetailsComponent,
-    EditAccountFormComponent
+    EditAccountFormComponent,
+    ConfirmTransferComponent
 
   ],
   imports: [
@@ -54,6 +58,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     MatMenuModule,
     MatIconModule,
     MatToolbarModule,
+    MatDialogModule,
     MatButtonModule,
     MatTableModule,
     MatFormFieldModule,
@@ -71,7 +76,8 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
       resetTimeoutOnDuplicate: true
     }),
   ],
-  providers: [AccountService, TransferService],
+  entryComponents: [ConfirmTransferComponent],
+  providers: [AccountService, TransferService, ConfirmTransferComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
