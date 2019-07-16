@@ -27,6 +27,7 @@
     "@ng-bootstrap/ng-bootstrap": "^5.0.0",
     "ng-form-group": "^1.4.2",
     "ng-http-loader": "^5.1.0",
+    "ngx-filter-pipe": "^2.1.2",
     "ngx-toastr": "^10.0.4",
     "rxjs": "^6.4.0",
     "rxjs-compat": "^6.5.2",

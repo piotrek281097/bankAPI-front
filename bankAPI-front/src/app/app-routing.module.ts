@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'add', component: AccountFormComponent },
   { path: 'maketransfer', component: TransferFormComponent },
   { path: 'transferdetails/:accountNumber', component: TransferDetailsComponent },
-  { path: 'edit-account/:accountNumber', component: EditAccountFormComponent }
+  { path: 'edit-account/:accountNumber', component: EditAccountFormComponent },
 ];
 
 @NgModule({

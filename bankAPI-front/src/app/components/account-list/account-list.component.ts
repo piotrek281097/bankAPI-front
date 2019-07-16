@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
 import { Account } from 'src/app/models/account';
 import { Router } from '@angular/router';
+import { Pipe, PipeTransform } from '@angular/core';
+import { FilterPipe } from 'ngx-filter-pipe';
 
 @Component({
   selector: 'app-account-list',
@@ -11,10 +13,11 @@ import { Router } from '@angular/router';
 export class AccountListComponent implements OnInit {
 
   accounts: Account[];
+  searchText: any = { accountNumber: '', money: '', currency: '', ownerName: ''};
 
   constructor(
     private accountService: AccountService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {

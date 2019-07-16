@@ -35,6 +35,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { ConfirmTransferComponent } from 'src/app/components/confirm-transfer/confirm-transfer.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { MatTabsModule } from '@angular/material';
+
 
 
 
@@ -49,7 +52,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     TransferFormComponent,
     TransferDetailsComponent,
     EditAccountFormComponent,
-    ConfirmTransferComponent
+    ConfirmTransferComponent,
 
   ],
   imports: [
@@ -69,9 +72,11 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatInputModule,
     MatSelectModule,
     MatCardModule,
+    MatTabsModule,
     MatNativeDateModule,
     NoopAnimationsModule,
     BrowserAnimationsModule,
+    FilterPipeModule,
     NgHttpLoaderModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,

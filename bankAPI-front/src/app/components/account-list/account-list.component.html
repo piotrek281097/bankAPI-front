@@ -1,3 +1,30 @@
+<h4>Wyszukaj rachunek po polu:</h4>
+<mat-tab-group>
+  <mat-tab label="Numer konta">
+    <div >
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText.accountNumber" autocomplete="off" placeholder="&#61442;  Szukaj rachunku po numerze konta">
+    </div>
+  </mat-tab>
+  <mat-tab label="Pieniądze">
+    <div >
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText.money" autocomplete="off" placeholder="&#61442;  Szukaj rachunku po kwocie na koncie">
+    </div>
+  </mat-tab>
+  <mat-tab label="Waluta">
+    <div >
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText.currency" autocomplete="off" placeholder="&#61442;  Szukaj rachunku po walucie">
+    </div>
+  </mat-tab>
+  <mat-tab label="Właściciel">
+    <div >
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText.ownerName" autocomplete="off" placeholder="&#61442;  Szukaj rachunku po nazwie właściciela">
+    </div>
+  </mat-tab>
+
+</mat-tab-group>
+
+<br><br>
+
 <h1 style="text-align: center">Lista rachunków</h1>
 <table class="table table-bordered table-striped">
   <thead class="thead-dark">
@@ -12,7 +39,7 @@
     </tr>
   </thead>
 
-    <tr *ngFor="let account of accounts; let i=index">
+    <tr *ngFor="let account of accounts | filterBy: searchText; let i=index">
       <td (click)="onClickField(account.accountNumber)">{{ i + 1 }} </td>
       <td (click)="onClickField(account.accountNumber)">{{ account.accountNumber }}</td>
       <td (click)="onClickField(account.accountNumber)">{{ account.money | number:'1.2-2' }}</td>
