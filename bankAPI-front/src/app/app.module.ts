@@ -37,7 +37,7 @@ import { ConfirmTransferComponent } from 'src/app/components/confirm-transfer/co
 import {MatDialogModule} from '@angular/material/dialog';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { MatTabsModule } from '@angular/material';
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 
@@ -77,6 +77,7 @@ import { MatTabsModule } from '@angular/material';
     NoopAnimationsModule,
     BrowserAnimationsModule,
     FilterPipeModule,
+    MatAutocompleteModule,
     NgHttpLoaderModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,

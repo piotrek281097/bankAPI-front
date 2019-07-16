@@ -92,4 +92,11 @@ export class AccountService {
       });
   }
 
+
+  public findByOwnerName(ownerName: string): Observable<Account[]> {
+    this.prepareHeader();
+
+    return this.http.get<Account[]>('/api/accounts/findByOwnerName/' + ownerName, {headers: this.headersObject});
+}
+
 }
