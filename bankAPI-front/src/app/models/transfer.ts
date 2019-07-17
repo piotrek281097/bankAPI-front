@@ -1,4 +1,5 @@
 export class Transfer {
+  transferId: number;
   firstAccountNumber: string;
   secondAccountNumber: string;
   money: number;

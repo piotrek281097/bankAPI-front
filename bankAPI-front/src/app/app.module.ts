@@ -38,7 +38,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { MatTabsModule } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatPaginatorModule } from '@angular/material';
+import { MatPaginatorIntl } from '@angular/material';
 
 
 
@@ -78,6 +80,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     BrowserAnimationsModule,
     FilterPipeModule,
     MatAutocompleteModule,
+    NgxPaginationModule,
     NgHttpLoaderModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,

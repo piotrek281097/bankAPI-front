@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TransferService } from 'src/app/services/transfer.service';
 import { Transfer } from 'src/app/models/transfer';
 import { Account } from 'src/app/models/account';
@@ -23,11 +23,13 @@ export class TransferDetailsComponent implements OnInit {
   conditionAreTransfersOut: boolean = false;
   conditionAreTransfersIn: boolean = false;
   conditionAreTransfersToShow: boolean = false;
+  isButtonCancelClicked: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private transferService: TransferService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -77,8 +79,18 @@ export class TransferDetailsComponent implements OnInit {
   showInTransfers() {
     console.log('In');
     this.titleTransfers = 'Przychodzące';
-    this.transfersToShow = this.transfersIn;
+    this.transfersToShow = this.transfersIn.filter(transfer => transfer.transferStatus !== 'CANCELED');
     this.conditionAreTransfers = this.conditionAreTransfersIn;
   }
 
-}
+   cancelTransfer(transferId: number) {
+      this.transferService.cancelTransfer(transferId);
+      this.isButtonCancelClicked = true;
+
+      setTimeout( () => {
+        window.location.reload();
+      }, 3000);
+    }
+  }
+
+

@@ -26,11 +26,19 @@ export class AccountListComponent implements OnInit{
   filteredAccounts: Observable<string[]>;
   isButtonShowAllAccountsVisible: boolean = false;
 
+  config: any;
+
   constructor(
     private accountService: AccountService,
     private router: Router,
 
-  ) {}
+  ) {
+    this.config = {
+      itemsPerPage: 10,
+      currentPage: 1,
+      totalItems: 0,
+    };
+  }
 
   ngOnInit() {
     this.accountService.getAllAccounts().subscribe(data => {
@@ -46,8 +54,14 @@ export class AccountListComponent implements OnInit{
         startWith(''),
         map(value => this._filter(value))
         );
+
+      this.config.totalItems = this.accounts.length;
     });
 }
+
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
 
   private _filter(value: string): string[] {
     const filterValue = this._normalizeValue(value);
@@ -90,5 +104,6 @@ export class AccountListComponent implements OnInit{
     });
 
     this.isButtonShowAllAccountsVisible = false;
+    this.control.setValue('');
   }
 }

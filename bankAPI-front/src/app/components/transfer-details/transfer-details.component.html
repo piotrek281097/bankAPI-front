@@ -39,7 +39,8 @@
       <td>{{ transfer.money | number:'1.2-2' }}</td>
       <td>{{ transfer.currency }}</td>
       <td>{{ transfer.dataOpenTransfer | date:'short' }}</td>
-      <td>{{ transfer.dataFinishTransfer | date:'short' }}</td>
-      <td>{{ transfer.transferStatus }}</td>
+      <td *ngIf="transfer.dataFinishTransfer !== null" >{{ transfer.dataFinishTransfer | date:'short' }}</td>
+      <td *ngIf="transfer.dataFinishTransfer === null" >Brak</td>
+      <td>{{ transfer.transferStatus }} <button *ngIf="transfer.transferStatus === 'OPENED'" [disabled]="isButtonCancelClicked" type="submit" class="btn btn-danger" (click)="cancelTransfer(transfer.transferId)">Anuluj</button></td>
     </tr>
 </table>

@@ -66,4 +66,27 @@ export class TransferService {
         });
       }
   }
+
+  public cancelTransfer(transferId: number) {
+    this.http.put('api/transfers/cancel/' + transferId, {headers: this.headersObject})
+    .toPromise()
+      .then((res: Response) => {
+        this.toastrService.success('Anulowano przelew');
+    }
+    )
+    .catch(error => {
+      if (error instanceof HttpErrorResponse && (error.status === 409 || error.status === 404)) {
+        if (error.status === 404) {
+          this.toastrService.error('Nie znaleziono przelewu w bazie!');
+        } else if (error.status === 409) {
+          this.toastrService.error('Przelew został już wykonany! Nie można anulowac');
+        }
+      }
+    })
+    .catch((res: Response) => {
+      this.toastrService.success('Nieznany błąd! Nie anulowano przelewu');
+    });
+  }
 }
+
+

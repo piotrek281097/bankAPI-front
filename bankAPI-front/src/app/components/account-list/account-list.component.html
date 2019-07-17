@@ -52,17 +52,22 @@
     </tr>
   </thead>
 
-    <tr *ngFor="let account of accounts | filterBy: searchText; let i=index">
-      <td (click)="onClickField(account.accountNumber)">{{ i + 1 }} </td>
-      <td (click)="onClickField(account.accountNumber)">{{ account.accountNumber }}</td>
-      <td (click)="onClickField(account.accountNumber)">{{ account.money | number:'1.2-2' }}</td>
-      <td (click)="onClickField(account.accountNumber)">{{ account.currency }}</td>
-      <td (click)="onClickField(account.accountNumber)">{{ account.ownerName }}</td>
-      <td><button type="submit" class="btn btn-warning" (click)="editAccount(account.accountNumber)">Edytuj</button></td>
-      <td><button type="submit" class="btn btn-danger" (click)="deleteAccount(account.accountNumber)">Usuń</button></td>
-    </tr>
+
+  <tr *ngFor="let account of accounts | paginate: config | filterBy: searchText; let i=index">
+    <td (click)="onClickField(account.accountNumber)">{{ i + 1 }} </td>
+    <td (click)="onClickField(account.accountNumber)">{{ account.accountNumber }}</td>
+    <td (click)="onClickField(account.accountNumber)">{{ account.money | number:'1.2-2' }}</td>
+    <td (click)="onClickField(account.accountNumber)">{{ account.currency }}</td>
+    <td (click)="onClickField(account.accountNumber)">{{ account.ownerName }}</td>
+    <td><button type="submit" class="btn btn-warning" (click)="editAccount(account.accountNumber)">Edytuj</button></td>
+    <td><button type="submit" class="btn btn-danger" (click)="deleteAccount(account.accountNumber)">Usuń</button></td>
+  </tr>
 </table>
-<br>
+
 <div style="text-align:center;" *ngIf="isButtonShowAllAccountsVisible">
-  <button type="submit" id="clickShowAccountByOwnerName" class="btn btn-primary" (click)="showAllAccountAgain()">Pokaż ponownie wszystkie konta</button>
+<br>
+<button type="submit" id="clickShowAccountByOwnerName" class="btn btn-primary" (click)="showAllAccountAgain()">Pokaż ponownie wszystkie konta</button>
 </div>
+
+<br>
+<pagination-controls previousLabel="Poprzednia" nextLabel="Następna" (pageChange)="pageChanged($event)"></pagination-controls>
