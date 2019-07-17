@@ -1,46 +1,48 @@
-<h1>Szczegóły konta</h1><br>
-<h3>Numer rachunku: <span class="text-secondary"> {{ accountNumber }}</span></h3>
-<h3>Środki na koncie: <span class="text-secondary"> {{ accountReadFromDatabase?.money }}</span></h3>
-<h3>Waluta: <span class="text-secondary"> {{ accountReadFromDatabase?.currency }}</span></h3>
-<h3>Właściciel: <span class="text-secondary"> {{ accountReadFromDatabase?.ownerName }}</span></h3>
-<br><br><br>
-<h5><strong>Wybierz rodzaj przelewów</strong></h5>
+<div class="main">
+  <h1>Szczegóły konta</h1><br>
+  <h3>Numer rachunku: <span class="text-secondary"> {{ accountNumber }}</span></h3>
+  <h3>Środki na koncie: <span class="text-secondary"> {{ accountReadFromDatabase?.money }}</span></h3>
+  <h3>Waluta: <span class="text-secondary"> {{ accountReadFromDatabase?.currency }}</span></h3>
+  <h3>Właściciel: <span class="text-secondary"> {{ accountReadFromDatabase?.ownerName }}</span></h3>
+  <br><br><br>
+  <h5><strong>Wybierz rodzaj przelewów</strong></h5>
 
-<mat-form-field class="selectField">
-  <mat-label> {{ titleTransfers }} </mat-label>
-  <mat-select #hasBackdrop>
-    <mat-option (click)="showAllTransfers()">Wszystkie</mat-option>
-    <mat-option (click)="showOutTransfers()">Wychodzące</mat-option>
-    <mat-option (click)="showInTransfers()">Przychodzące</mat-option>
-  </mat-select>
-</mat-form-field>
-<br><br>
-<h2 *ngIf="conditionAreTransfers" >Przelewy dla konta nr: <span class="badge badge-secondary"> {{ accountNumber }}</span></h2>
-<h2 *ngIf="conditionAreTransfers == false" >Brak tego typu przelewów dla konta nr: <span class="badge badge-secondary"> {{ accountNumber }}</span></h2>
-<br>
-<table class="table table-bordered table-striped">
-  <thead class="thead-dark">
-    <tr *ngIf="conditionAreTransfers" >
-      <th scope="col">Nr</th>
-      <th scope="col">Nr konta nadawcy</th>
-      <th scope="col">Nr konta odbiorcy</th>
-      <th scope="col">Przelane środki</th>
-      <th scope="col">Waluta</th>
-      <th scope="col">Data zgłoszenia</th>
-      <th scope="col">Data wykonania</th>
-      <th scope="col">Status transferu</th>
-    </tr>
-  </thead>
+  <mat-form-field class="selectField">
+    <mat-label> {{ titleTransfers }} </mat-label>
+    <mat-select #hasBackdrop>
+      <mat-option (click)="showAllTransfers()">Wszystkie</mat-option>
+      <mat-option (click)="showOutTransfers()">Wychodzące</mat-option>
+      <mat-option (click)="showInTransfers()">Przychodzące</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br><br>
+  <h2 *ngIf="conditionAreTransfers" >Przelewy dla konta nr: <span class="badge badge-secondary"> {{ accountNumber }}</span></h2>
+  <h2 *ngIf="conditionAreTransfers == false" >Brak tego typu przelewów dla konta nr: <span class="badge badge-secondary"> {{ accountNumber }}</span></h2>
+  <br>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr *ngIf="conditionAreTransfers" >
+        <th scope="col">Nr</th>
+        <th scope="col">Nr konta nadawcy</th>
+        <th scope="col">Nr konta odbiorcy</th>
+        <th scope="col">Przelane środki</th>
+        <th scope="col">Waluta</th>
+        <th scope="col">Data zgłoszenia</th>
+        <th scope="col">Data wykonania</th>
+        <th scope="col">Status transferu</th>
+      </tr>
+    </thead>
 
-    <tr *ngFor="let transfer of transfersToShow; let i=index">
-      <td>{{ i + 1 }}</td>
-      <td>{{ transfer.firstAccountNumber }}</td>
-      <td>{{ transfer.secondAccountNumber }}</td>
-      <td>{{ transfer.money | number:'1.2-2' }}</td>
-      <td>{{ transfer.currency }}</td>
-      <td>{{ transfer.dataOpenTransfer | date:'short' }}</td>
-      <td *ngIf="transfer.dataFinishTransfer !== null" >{{ transfer.dataFinishTransfer | date:'short' }}</td>
-      <td *ngIf="transfer.dataFinishTransfer === null" >Brak</td>
-      <td>{{ transfer.transferStatus }} <button *ngIf="transfer.transferStatus === 'OPENED'" [disabled]="isButtonCancelClicked" type="submit" class="btn btn-danger" (click)="cancelTransfer(transfer.transferId)">Anuluj</button></td>
-    </tr>
-</table>
+      <tr *ngFor="let transfer of transfersToShow; let i=index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ transfer.firstAccountNumber }}</td>
+        <td>{{ transfer.secondAccountNumber }}</td>
+        <td>{{ transfer.money | number:'1.2-2' }}</td>
+        <td>{{ transfer.currency }}</td>
+        <td>{{ transfer.dataOpenTransfer | date:'short' }}</td>
+        <td *ngIf="transfer.dataFinishTransfer !== null" >{{ transfer.dataFinishTransfer | date:'short' }}</td>
+        <td *ngIf="transfer.dataFinishTransfer === null" >Brak</td>
+        <td>{{ transfer.transferStatus }} <button *ngIf="transfer.transferStatus === 'OPENED' && accountNumber === transfer.firstAccountNumber" [disabled]="isButtonCancelClicked" type="submit" class="btn btn-danger" (click)="cancelTransfer(transfer.transferId)">Anuluj</button></td>
+      </tr>
+  </table>
+</div>

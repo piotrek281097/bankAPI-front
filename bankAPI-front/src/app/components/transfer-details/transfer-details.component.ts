@@ -18,6 +18,7 @@ export class TransferDetailsComponent implements OnInit {
   transfersToShow: Transfer[];
   titleTransfers: string = "Wszystkie";
   accountNumber: string;
+  accountId: number;
   accountReadFromDatabase: Account;
   conditionAreTransfers: boolean = false;
   conditionAreTransfersOut: boolean = false;
@@ -33,13 +34,20 @@ export class TransferDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.accountNumber = this.route.snapshot.paramMap.get('accountNumber');
+    this.accountId = +this.route.snapshot.paramMap.get('accountId');
 
-    this.accountService.findByNumber(this.accountNumber).subscribe(data => {
+    console.log("INIT accountId " + this.accountId);
+
+    this.accountService.findByAccountId(+this.route.snapshot.paramMap.get('accountId')).subscribe(data => {
       this.accountReadFromDatabase = data;
+      this.accountNumber = this.accountReadFromDatabase.accountNumber;
+      console.log("inumber acc w init " + this.accountNumber);
     });
 
-    this.transferService.getTransfersByAccountNumber(this.route.snapshot.paramMap.get('accountNumber')).subscribe(data => {
+    console.log("id acc w init " + this.accountId);
+
+    this.transferService.getTransfersByAccountId(+this.route.snapshot.paramMap.get('accountId')).subscribe(data => {
+      console.log("id acc w getAllTransfers " + this.accountId);
       this.transfersForOneAccountNumber = data;
       if (this.transfersForOneAccountNumber.length > 0) {
         this.conditionAreTransfers = true;
@@ -47,21 +55,22 @@ export class TransferDetailsComponent implements OnInit {
       this.transfersToShow = this.transfersForOneAccountNumber;
     });
 
-    this.transferService.getTransfersOutByAccountNumber(this.route.snapshot.paramMap.get('accountNumber')).subscribe(data => {
+
+    this.transferService.getTransfersOutByAccountId(+this.route.snapshot.paramMap.get('accountId')).subscribe(data => {
       this.transfersOut = data;
       if (this.transfersOut.length > 0) {
         this.conditionAreTransfersOut = true;
       }
     });
 
-    this.transferService.getTransfersInByAccountNumber(this.route.snapshot.paramMap.get('accountNumber')).subscribe(data => {
+    this.transferService.getTransfersInByAccountId(+this.route.snapshot.paramMap.get('accountId')).subscribe(data => {
       this.transfersIn = data;
       if (this.transfersIn.length > 0) {
         this.conditionAreTransfersIn = true;
       }
     });
-  }
 
+  }
   showAllTransfers() {
     console.log('All');
     this.titleTransfers = 'Wszystkie';

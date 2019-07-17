@@ -57,10 +57,10 @@ export class AccountService {
     });
   }
 
-  public delete(accountNumber: string) {
+  public delete(accountId: number) {
     this.prepareHeader();
 
-    this.http.delete('/api/accounts/delete/' + accountNumber, {headers: this.headersObject}).subscribe(a => a);
+    this.http.delete('/api/accounts/delete/' + accountId, {headers: this.headersObject}).subscribe(a => a);
   }
 
   public findByNumber(accountNumber: string): Observable<Account> {
@@ -69,10 +69,16 @@ export class AccountService {
       return this.http.get<Account>('/api/accounts/findByNumber/' + accountNumber, {headers: this.headersObject});
   }
 
-  public updateAccount(accountNumber: string, account: Account) {
+  public findByAccountId(accountId: number): Observable<Account> {
+    this.prepareHeader();
+
+    return this.http.get<Account>('/api/accounts/findAccountByAccountId/' + accountId, {headers: this.headersObject});
+}
+
+  public updateAccount(accountId: number, account: Account) {
       this.prepareHeader();
 
-      return this.http.put('/api/accounts/update/' + accountNumber, account, {headers: this.headersObject}).toPromise()
+      return this.http.put('/api/accounts/update/' + accountId, account, {headers: this.headersObject}).toPromise()
       .then((res: Response) => {
         this.toastrService.success('Edytowano rachunek');
         setTimeout( () => {

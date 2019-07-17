@@ -22,19 +22,19 @@ export class TransferService {
     private router: Router,
     private toastrService: ToastrService) { }
 
-  public getTransfersByAccountNumber(accountNumber: string): Observable<Transfer[]> {
+  public getTransfersByAccountId(accountId: number): Observable<Transfer[]> {
     this.prepareHeader();
-    return this.http.get<Transfer[]>('api/transfers/findByNumber/' + accountNumber, {headers: this.headersObject});
+    return this.http.get<Transfer[]>('api/transfers/findByAccountId/' + accountId, {headers: this.headersObject});
   }
 
-  public getTransfersOutByAccountNumber(accountNumber: string): Observable<Transfer[]> {
+  public getTransfersOutByAccountId(accountId: number): Observable<Transfer[]> {
     this.prepareHeader();
-    return this.http.get<Transfer[]>('api/transfersOut/findByNumber/' + accountNumber, {headers: this.headersObject});
+    return this.http.get<Transfer[]>('api/transfersOut/findByAccountId/' + accountId, {headers: this.headersObject});
   }
 
-  public getTransfersInByAccountNumber(accountNumber: string): Observable<Transfer[]> {
+  public getTransfersInByAccountId(accountId: number): Observable<Transfer[]> {
     this.prepareHeader();
-    return this.http.get<Transfer[]>('api/transfersIn/findByNumber/' + accountNumber, {headers: this.headersObject});
+    return this.http.get<Transfer[]>('api/transfersIn/findByAccountId/' + accountId, {headers: this.headersObject});
   }
 
 

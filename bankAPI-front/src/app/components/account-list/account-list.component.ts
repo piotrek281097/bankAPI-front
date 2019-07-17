@@ -52,7 +52,7 @@ export class AccountListComponent implements OnInit{
 
       this.filteredAccounts = this.control.valueChanges.pipe(
         startWith(''),
-        map(value => this._filter(value))
+        map(value => this._filter(value)),
         );
 
       this.config.totalItems = this.accounts.length;
@@ -65,26 +65,26 @@ export class AccountListComponent implements OnInit{
 
   private _filter(value: string): string[] {
     const filterValue = this._normalizeValue(value);
-    return this.owners.filter(street => this._normalizeValue(street).includes(filterValue));
+    return this.owners.filter(account => this._normalizeValue(account).includes(filterValue));
   }
 
   private _normalizeValue(value: string): string {
     return value.toLowerCase().replace(/\s/g, '');
   }
 
-  onClickField(accountNumber: string) {
-    console.log("onClickField dziala " + accountNumber);
-    this.router.navigate(['/transferdetails/' + accountNumber]);
+  onClickField(accountId: number) {
+    console.log("onClickField dziala " + accountId);
+    this.router.navigate(['/transferdetails/' + accountId]);
   }
 
-  editAccount(accountNumber: string) {
-    console.log("edit " + accountNumber);
-    this.router.navigate(['/edit-account/' + accountNumber]);
+  editAccount(accountId: number) {
+    console.log("edit " + accountId);
+    this.router.navigate(['/edit-account/' + accountId]);
   }
 
-  deleteAccount(accountNumber: string) {
-    console.log("delete " + accountNumber);
-    this.accountService.delete(accountNumber);
+  deleteAccount(accountId: number) {
+    console.log("delete " + accountId);
+    this.accountService.delete(accountId);
     window.location.reload();
   }
 

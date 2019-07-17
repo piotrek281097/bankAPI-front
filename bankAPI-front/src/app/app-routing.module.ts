@@ -13,8 +13,8 @@ const routes: Routes = [
   { path: 'accounts', component: AccountListComponent },
   { path: 'add', component: AccountFormComponent },
   { path: 'maketransfer', component: TransferFormComponent },
-  { path: 'transferdetails/:accountNumber', component: TransferDetailsComponent },
-  { path: 'edit-account/:accountNumber', component: EditAccountFormComponent },
+  { path: 'transferdetails/:accountId', component: TransferDetailsComponent },
+  { path: 'edit-account/:accountId', component: EditAccountFormComponent },
 ];
 
 @NgModule({

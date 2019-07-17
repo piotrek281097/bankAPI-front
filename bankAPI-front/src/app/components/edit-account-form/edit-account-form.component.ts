@@ -21,6 +21,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class EditAccountFormComponent implements OnInit {
 
   accountNumber: string;
+  accountId: number;
   accountEditForm: FormGroup;
   money: number;
   currency: string;
@@ -43,11 +44,12 @@ export class EditAccountFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.accountNumber = this.route.snapshot.paramMap.get('accountNumber');
+    this.accountId = +this.route.snapshot.paramMap.get('accountId');
 
-    this.accountService.findByNumber(this.accountNumber).subscribe(data => {
+    this.accountService.findByAccountId(+this.accountId).subscribe(data => {
       this.accountReadFromDatabase = data;
       this.isAccountFromDataBaseLoaded = true;
+      this.accountNumber = this.accountReadFromDatabase.accountNumber;
     });
 
     this.accountEditForm = this.formBuilder.group({
@@ -71,13 +73,10 @@ export class EditAccountFormComponent implements OnInit {
       console.log(accountToUpdate);
 
       if (!this.accountEditForm.invalid) {
-        this.accountService.updateAccount(this.accountNumber, accountToUpdate);
+        this.accountService.updateAccount(this.accountId, accountToUpdate);
       } else {
         this.toastrService.error('BŁĄD! Nieprawidłowe dane. Nie można edytować rachunku.');
       }
-
-
-
   }
 
   cancel() {

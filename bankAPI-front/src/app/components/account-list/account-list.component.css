@@ -6,6 +6,30 @@
   width: 100%;
 }
 
+.table-bordered{
+  width:100%;
+  border-collapse:collapse;
+}
+.table-bordered td{
+  padding:7px; border:#9A10F6 1px solid;
+  cursor: pointer;
+}
+/* Define the default color for all the table rows */
+.table-bordered tr{
+  background: #FEFEFE;
+}
+/* Define the hover highlight color for the table row */
+.table-bordered tr:hover {
+    background-color: #D7BCE9;
+}
+
+.main {
+  margin-top: 50px;
+}
+
+
+
+
 .form-control{
   height: 40px;
   padding: 0px;

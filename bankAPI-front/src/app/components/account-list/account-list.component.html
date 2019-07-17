@@ -9,65 +9,63 @@
       </form><br>
 </div>
 
-<div *ngIf="!isHomeComponentLoaded">
-  <h4>Wyszukaj rachunek po polu:</h4>
-  <mat-tab-group >
-    <mat-tab label="Numer konta">
-      <div >
-        <input class="form-control" type="text" name="search" [(ngModel)]="searchText.accountNumber" autocomplete="off" placeholder="&#61442;  Szukaj rachunku po numerze konta">
-      </div>
-    </mat-tab>
-    <mat-tab label="Pieniądze">
-      <div >
-        <input class="form-control" type="text" name="search" [(ngModel)]="searchText.money" autocomplete="off" placeholder="&#61442;  Szukaj rachunku po kwocie na koncie">
-      </div>
-    </mat-tab>
-    <mat-tab label="Waluta">
-      <div >
-        <input class="form-control" type="text" name="search" [(ngModel)]="searchText.currency" autocomplete="off" placeholder="&#61442;  Szukaj rachunku po walucie">
-      </div>
-    </mat-tab>
-    <mat-tab label="Właściciel">
-      <div >
-        <input class="form-control" type="text" name="search" [(ngModel)]="searchText.ownerName" autocomplete="off" placeholder="&#61442;  Szukaj rachunku po nazwie właściciela">
-      </div>
-    </mat-tab>
+<div class="main">
+  <div *ngIf="!isHomeComponentLoaded">
+    <h4>Wyszukaj rachunek po polu:</h4>
+    <mat-tab-group >
+      <mat-tab label="Numer konta">
+        <div >
+          <input class="form-control" type="text" name="search" [(ngModel)]="searchText.accountNumber" autocomplete="off" placeholder="&#61442;  Szukaj rachunku po numerze konta">
+        </div>
+      </mat-tab>
+      <mat-tab label="Pieniądze">
+        <div >
+          <input class="form-control" type="text" name="search" [(ngModel)]="searchText.money" autocomplete="off" placeholder="&#61442;  Szukaj rachunku po kwocie na koncie">
+        </div>
+      </mat-tab>
+      <mat-tab label="Waluta">
+        <div >
+          <input class="form-control" type="text" name="search" [(ngModel)]="searchText.currency" autocomplete="off" placeholder="&#61442;  Szukaj rachunku po walucie">
+        </div>
+      </mat-tab>
+      <mat-tab label="Właściciel">
+        <div >
+          <input class="form-control" type="text" name="search" [(ngModel)]="searchText.ownerName" autocomplete="off" placeholder="&#61442;  Szukaj rachunku po nazwie właściciela">
+        </div>
+      </mat-tab>
 
-  </mat-tab-group>
+    </mat-tab-group>
+    <br>
+  </div>
   <br>
-</div>
-<br>
 
-<h1 style="text-align: center">Lista rachunków</h1>
-<table class="table table-bordered table-striped">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Nr</th>
-      <th scope="col">Numer konta</th>
-      <th scope="col">Pieniądze</th>
-      <th scope="col">Waluta</th>
-      <th scope="col">Właściciel</th>
-      <th scope="col">Edycja</th>
-      <th scope="col">Usunięcie</th>
+  <h1 style="text-align: center">Lista rachunków</h1>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Nr</th>
+        <th scope="col">Numer konta</th>
+        <th scope="col">Pieniądze</th>
+        <th scope="col">Waluta</th>
+        <th scope="col">Właściciel</th>
+        <th scope="col">          </th>
+        <th scope="col">          </th>
+      </tr>
+    </thead>
+
+    <tr *ngFor="let account of accounts | paginate: config | filterBy: searchText; let i=index">
+      <td (click)="onClickField(account.accountId)">{{ i + 1 }} </td>
+      <td (click)="onClickField(account.accountId)">{{ account.accountNumber }}</td>
+      <td (click)="onClickField(account.accountId)">{{ account.money | number:'1.2-2' }}</td>
+      <td (click)="onClickField(account.accountId)">{{ account.currency }}</td>
+      <td (click)="onClickField(account.accountId)">{{ account.ownerName }}</td>
+      <td><button type="submit" class="btn btn-warning" (click)="editAccount(account.accountId)">Edytuj</button></td>
+      <td><button type="submit" class="btn btn-danger" (click)="deleteAccount(account.accountId)">Usuń</button></td>
     </tr>
-  </thead>
+  </table>
 
-
-  <tr *ngFor="let account of accounts | paginate: config | filterBy: searchText; let i=index">
-    <td (click)="onClickField(account.accountNumber)">{{ i + 1 }} </td>
-    <td (click)="onClickField(account.accountNumber)">{{ account.accountNumber }}</td>
-    <td (click)="onClickField(account.accountNumber)">{{ account.money | number:'1.2-2' }}</td>
-    <td (click)="onClickField(account.accountNumber)">{{ account.currency }}</td>
-    <td (click)="onClickField(account.accountNumber)">{{ account.ownerName }}</td>
-    <td><button type="submit" class="btn btn-warning" (click)="editAccount(account.accountNumber)">Edytuj</button></td>
-    <td><button type="submit" class="btn btn-danger" (click)="deleteAccount(account.accountNumber)">Usuń</button></td>
-  </tr>
-</table>
-
-<div style="text-align:center;" *ngIf="isButtonShowAllAccountsVisible">
-<br>
-<button type="submit" id="clickShowAccountByOwnerName" class="btn btn-primary" (click)="showAllAccountAgain()">Pokaż ponownie wszystkie konta</button>
+  <div style="text-align:center;" *ngIf="isButtonShowAllAccountsVisible"><br>
+    <button type="submit" id="clickShowAccountByOwnerName" class="btn btn-primary" (click)="showAllAccountAgain()">Pokaż ponownie wszystkie konta</button>
+  </div><br>
+  <pagination-controls previousLabel="Poprzednia" nextLabel="Następna" (pageChange)="pageChanged($event)"></pagination-controls>
 </div>
-
-<br>
-<pagination-controls previousLabel="Poprzednia" nextLabel="Następna" (pageChange)="pageChanged($event)"></pagination-controls>
