@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import {startWith, map} from 'rxjs/operators';
 import { Button } from 'protractor';
+import { ConfirmDeleteDialogService } from 'src/app/services/confirm-delete-dialog.service';
 
 @Component({
   selector: 'app-account-list',
@@ -31,6 +32,7 @@ export class AccountListComponent implements OnInit{
   constructor(
     private accountService: AccountService,
     private router: Router,
+    private confirmDeleteDialogService: ConfirmDeleteDialogService
 
   ) {
     this.config = {
@@ -82,10 +84,9 @@ export class AccountListComponent implements OnInit{
     this.router.navigate(['/edit-account/' + accountId]);
   }
 
-  deleteAccount(accountId: number) {
+  deleteAccount(accountId: number, accountNumber: string, money: number, currency: string, ownerName: string) {
     console.log("delete " + accountId);
-    this.accountService.delete(accountId);
-    window.location.reload();
+    this.confirmDeleteDialogService.openConfirmDeleteDialog(accountId, accountNumber, money, currency, ownerName);
   }
 
   showChosenAccount(owner: string) {

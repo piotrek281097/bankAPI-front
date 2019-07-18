@@ -1,0 +1,11 @@
+<div class="main">
+    <h4>Czy na pewno chcesz usunać to konto?</h4><br>
+    <h6>Nr konta: <strong>{{ data.accountNumber }}</strong></h6>
+    <h6>Pieniądze: <strong>{{ data.money }}</strong></h6>
+    <h6>Waluta: <strong>{{ data.currency }}</strong></h6>
+    <h6>Właściciel: <strong>{{ data.ownerName }}</strong></h6><br>
+    <div style="display: flex; justify-content: center;">
+        <button class="btn btn-danger" (click)="delete()">Usuń</button>
+        <button class="btn btn-dark" (click)="cancel()">Anuluj</button>
+    </div>
+</div>

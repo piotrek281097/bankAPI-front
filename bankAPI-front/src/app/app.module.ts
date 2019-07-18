@@ -41,6 +41,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatPaginatorModule } from '@angular/material';
 import { MatPaginatorIntl } from '@angular/material';
+import { ConfirmDeleteComponent } from 'src/app/components/confirm-delete/confirm-delete.component';
 
 
 
@@ -55,6 +56,7 @@ import { MatPaginatorIntl } from '@angular/material';
     TransferDetailsComponent,
     EditAccountFormComponent,
     ConfirmTransferComponent,
+    ConfirmDeleteComponent,
 
   ],
   imports: [
@@ -90,8 +92,8 @@ import { MatPaginatorIntl } from '@angular/material';
       resetTimeoutOnDuplicate: true
     }),
   ],
-  entryComponents: [ConfirmTransferComponent],
-  providers: [AccountService, TransferService, ConfirmTransferComponent],
+  entryComponents: [ConfirmTransferComponent, ConfirmDeleteComponent],
+  providers: [AccountService, TransferService, ConfirmTransferComponent, ConfirmDeleteComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

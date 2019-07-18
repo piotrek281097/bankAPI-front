@@ -60,7 +60,7 @@
       <td (click)="onClickField(account.accountId)">{{ account.currency }}</td>
       <td (click)="onClickField(account.accountId)">{{ account.ownerName }}</td>
       <td><button type="submit" class="btn btn-warning" (click)="editAccount(account.accountId)">Edytuj</button></td>
-      <td><button type="submit" class="btn btn-danger" (click)="deleteAccount(account.accountId)">Usuń</button></td>
+      <td><button type="submit" class="btn btn-danger" (click)="deleteAccount(account.accountId, account.accountNumber, account.money, account.currency, account.ownerName)">Usuń</button></td>
     </tr>
   </table>
 
