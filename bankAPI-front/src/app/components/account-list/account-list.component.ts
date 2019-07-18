@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, HostListener, OnDestroy } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
 import { Account } from 'src/app/models/account';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { ConfirmDeleteDialogService } from 'src/app/services/confirm-delete-dial
   templateUrl: './account-list.component.html',
   styleUrls: ['./account-list.component.css']
 })
-export class AccountListComponent implements OnInit{
+export class AccountListComponent implements OnInit, OnDestroy{
 
   @Input() isHomeComponentLoaded: boolean;
 
@@ -23,6 +23,8 @@ export class AccountListComponent implements OnInit{
   owners: string[] = [];
   filteredAccounts: Observable<string[]>;
   isButtonShowAllAccountsVisible: boolean;
+  inputOwnerName: string;
+  isAccountListComponentLoaded: boolean;
 
   config: any;
 
@@ -39,6 +41,20 @@ export class AccountListComponent implements OnInit{
     };
 
     this.isButtonShowAllAccountsVisible = false;
+    this.isAccountListComponentLoaded = false;
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    console.log(event);
+
+    if (event.keyCode === 13) {
+      if (this.isAccountListComponentLoaded === true) {
+          console.log("enter");
+          console.log(this.inputOwnerName);
+          this.showChosenAccount(this.inputOwnerName);
+      }
+    }
   }
 
   ngOnInit() {
@@ -56,6 +72,12 @@ export class AccountListComponent implements OnInit{
 
       this.config.totalItems = this.accounts.length;
     });
+
+    this.isAccountListComponentLoaded = true;
+}
+
+ngOnDestroy() {
+  this.isAccountListComponentLoaded = false;
 }
 
   pageChanged(event) {
@@ -72,7 +94,6 @@ export class AccountListComponent implements OnInit{
   }
 
   onClickField(accountId: number) {
-    console.log('onClickField dziala ' + accountId);
     this.router.navigate(['/transferdetails/' + accountId]);
   }
 
@@ -104,4 +125,5 @@ export class AccountListComponent implements OnInit{
     this.isButtonShowAllAccountsVisible = false;
     this.control.setValue('');
   }
+
 }

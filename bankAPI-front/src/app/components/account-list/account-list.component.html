@@ -1,6 +1,6 @@
 <div *ngIf="isHomeComponentLoaded">
     <form class="example-form">
-        <input type="text" class="form-control" placeholder="&#61442; Szukaj po właścicielu konta" [formControl]="control" [matAutocomplete]="auto" >
+        <input type="text" [(ngModel)]="inputOwnerName" class="form-control" placeholder="&#61442; Szukaj po właścicielu konta" [formControl]="control" [matAutocomplete]="auto" >
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option (click)="showChosenAccount(account)" *ngFor="let account of filteredAccounts | async" [value]="account">
             {{account}}

@@ -4,6 +4,8 @@ import { Account } from '../models/account';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { EMPTY, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AccountService {
@@ -102,7 +104,17 @@ export class AccountService {
   public findByOwnerName(ownerName: string): Observable<Account[]> {
     this.prepareHeader();
 
-    return this.http.get<Account[]>('/api/accounts/findByOwnerName/' + ownerName, {headers: this.headersObject});
+    return this.http.get<Account[]>('/api/accounts/findByOwnerName/' + ownerName, {headers: this.headersObject})
+    .pipe(
+      catchError(err => {
+        if (err.status === 404) {
+          this.toastrService.error('Nie znaleziono rachunku z takim właścicielem');
+          return throwError(err);
+        }
+      })
+    )
+  }
 }
 
-}
+
+
