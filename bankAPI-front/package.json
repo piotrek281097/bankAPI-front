@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "~8.1.0",
     "@angular/router": "~8.1.0",
     "@ng-bootstrap/ng-bootstrap": "^5.0.0",
+    "express": "^4.17.1",
     "ng-form-group": "^1.4.2",
     "ng-http-loader": "^5.1.0",
     "ngx-filter-pipe": "^2.1.2",
