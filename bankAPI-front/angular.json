@@ -37,8 +37,6 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "browserTarget": "bankcomarchrestapi:build:production",
-              "proxyConfig": "proxy.config.json",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -65,7 +63,8 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "bankAPI-front:build:production"
+              "browserTarget": "bankcomarchrestapi:build:production",
+              "proxyConfig": "proxy.config.json",
             }
           }
         },
