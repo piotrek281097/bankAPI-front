@@ -63,8 +63,8 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "bankcomarchrestapi:build:production",
-              "proxyConfig": "proxy.config.json",
+              "browserTarget": "bank-api-front:build:production",
+              "proxyConfig": "proxy.config.json"
             }
           }
         },
