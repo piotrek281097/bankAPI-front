@@ -37,6 +37,8 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "browserTarget": "bankcomarchrestapi:build:production",
+              "proxyConfig": "proxy.config.json",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,

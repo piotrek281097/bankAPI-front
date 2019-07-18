@@ -1,7 +1,7 @@
 {
   "/api": {
-    "target": "https://bankrestapicomarch.herokuapp.com",
-    "secure": true,
+    "target": "https://bankrestapicomarch.herokuapp.com"ad,
+    "secure": false,
     "changeOrigin": true
   }
 }
