@@ -44,7 +44,7 @@ export class TransferService {
     if (accountNumberFrom === accountNumberTo) {
       this.toastrService.error('BŁĄD! Nr rachunku nadawcy i odbiorcy nie może być taki sam.');
     } else {
-      this.http.put('api/accounts/transfer/' + accountNumberFrom + '/' + accountNumberTo + '/' + money,{headers: this.headersObject})
+      this.http.put('api/accounts/transfer/' + accountNumberFrom + '/' + accountNumberTo + '/' + money, {headers: this.headersObject})
       .toPromise()
         .then((res: Response) => {
           this.toastrService.success('Zlecono przelew');

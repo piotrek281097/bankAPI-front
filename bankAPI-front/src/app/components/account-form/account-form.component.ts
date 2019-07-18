@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 import { Account } from 'src/app/models/account';
-import {ToastrService} from 'ngx-toastr';
-import {ErrorStateMatcher} from '@angular/material/core';
-import {FormBuilder, NgForm, FormGroup, Validators, FormControl, FormGroupDirective} from '@angular/forms';
-import { AppComponent } from 'src/app/app.component';
+import { ToastrService } from 'ngx-toastr';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { FormBuilder, NgForm, FormGroup, Validators, FormControl, FormGroupDirective } from '@angular/forms';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {

@@ -25,8 +25,6 @@ export class ConfirmTransferComponent implements OnInit {
   accept() {
     this.dialogRef.close();
     this.transferService.makeTransfer(this.data.accountNumberFrom, this.data.accountNumberTo, this.data.money);
-    console.log("1 " + this.data.accountNumberFrom);
-    console.log("2 " + this.data.accountNumberTo);
     setTimeout( () => {
       window.location.reload();
     }, 3000);
@@ -35,5 +33,4 @@ export class ConfirmTransferComponent implements OnInit {
   cancel() {
     this.dialogRef.close();
   }
-
 }

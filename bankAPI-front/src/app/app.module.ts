@@ -15,16 +15,8 @@ import { TransferDetailsComponent } from './components/transfer-details/transfer
 import { EditAccountFormComponent } from './components/edit-account-form/edit-account-form.component';
 import {MatNativeDateModule} from '@angular/material/core';
 
-import {
-  MatMenuModule,
-  MatIconModule,
-  MatTableModule,
-  MatDialog,
-} from "@angular/material";
-import {
-  BrowserAnimationsModule,
-  NoopAnimationsModule
-} from "@angular/platform-browser/animations";
+import { MatMenuModule, MatIconModule, MatTableModule } from "@angular/material";
+import { BrowserAnimationsModule, NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { MatInputModule } from "@angular/material/input";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
@@ -34,13 +26,11 @@ import { MatCardModule } from "@angular/material/card";
 import { ToastrModule } from 'ngx-toastr';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { ConfirmTransferComponent } from 'src/app/components/confirm-transfer/confirm-transfer.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { MatTabsModule } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { MatPaginatorModule } from '@angular/material';
-import { MatPaginatorIntl } from '@angular/material';
 import { ConfirmDeleteComponent } from 'src/app/components/confirm-delete/confirm-delete.component';
 
 
@@ -93,7 +83,7 @@ import { ConfirmDeleteComponent } from 'src/app/components/confirm-delete/confir
     }),
   ],
   entryComponents: [ConfirmTransferComponent, ConfirmDeleteComponent],
-  providers: [AccountService, TransferService, ConfirmTransferComponent, ConfirmDeleteComponent ],
+  providers: [AccountService, TransferService, ConfirmTransferComponent,  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

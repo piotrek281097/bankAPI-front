@@ -1,10 +1,9 @@
 <div class="container">
     <h1>Edycja rachunku</h1>
     <form [formGroup]="accountEditForm">
-
       <h3>Nr rachunku:   <span class="badge badge-secondary"> {{ accountNumber }}</span></h3>
 
-     <mat-form-field *ngIf="isAccountFromDataBaseLoaded" class="example-full-width">
+      <mat-form-field *ngIf="isAccountFromDataBaseLoaded" class="example-full-width">
           <label for="money">Pieniądze</label>
           <input matInput [(ngModel)] = 'accountReadFromDatabase.money' formControlName="money" id="money" class="form-control"
                   [errorStateMatcher]="matcher">
@@ -12,7 +11,6 @@
               Pieniądze są <strong>wymagane</strong>, używamy <strong> kropki. </strong> Np. 100.00
           </mat-error>
       </mat-form-field>
-
       <mat-form-field *ngIf="isAccountFromDataBaseLoaded" class="example-full-width">
           <label for="currency">Waluta</label>
           <input matInput [(ngModel)] = 'accountReadFromDatabase.currency' formControlName="currency" id="currency" class="form-control"
@@ -21,7 +19,6 @@
               Skrót waluty jest<strong> wymagany </strong> oraz musi składać się z <strong> 3 drukowanych liter</strong>
           </mat-error>
       </mat-form-field>
-
       <mat-form-field *ngIf="isAccountFromDataBaseLoaded" class="example-full-width">
           <label for="ownerName">Właściciel</label>
           <input matInput [(ngModel)] = 'accountReadFromDatabase.ownerName' formControlName="ownerName" id="ownerName" class="form-control"
@@ -30,11 +27,8 @@
               Właściciel jest <strong>wymagany</strong> oraz musi mieć mniej niż <strong>50 znaków</strong>
           </mat-error>
       </mat-form-field>
-
       <br><br>
-
       <button type="submit" class="btn btn-success" (click)="onSubmit()">Zapisz zmiany</button>
       <button type="submit" class="btn btn-danger" (click)="cancel()">Anuluj</button>
-
     </form>
   </div>

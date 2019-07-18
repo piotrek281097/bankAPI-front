@@ -16,38 +16,39 @@ export class TransferDetailsComponent implements OnInit {
   transfersOut: Transfer[];
   transfersIn: Transfer[];
   transfersToShow: Transfer[];
-  titleTransfers: string = "Wszystkie";
+  titleTransfers: string;
   accountNumber: string;
   accountId: number;
   accountReadFromDatabase: Account;
-  conditionAreTransfers: boolean = false;
-  conditionAreTransfersOut: boolean = false;
-  conditionAreTransfersIn: boolean = false;
-  conditionAreTransfersToShow: boolean = false;
-  isButtonCancelClicked: boolean = false;
+  conditionAreTransfers: boolean;
+  conditionAreTransfersOut: boolean;
+  conditionAreTransfersIn: boolean;
+  conditionAreTransfersToShow: boolean;
+  isButtonCancelClicked: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private transferService: TransferService,
     private accountService: AccountService,
     private router: Router
-  ) {}
+  ) {
+    this.conditionAreTransfers = false;
+    this.conditionAreTransfersOut = false;
+    this.conditionAreTransfersIn = false;
+    this.conditionAreTransfersToShow = false;
+    this.isButtonCancelClicked = false;
+    this.titleTransfers = 'Wszystkie';
+  }
 
   ngOnInit() {
     this.accountId = +this.route.snapshot.paramMap.get('accountId');
 
-    console.log("INIT accountId " + this.accountId);
-
     this.accountService.findByAccountId(+this.route.snapshot.paramMap.get('accountId')).subscribe(data => {
       this.accountReadFromDatabase = data;
       this.accountNumber = this.accountReadFromDatabase.accountNumber;
-      console.log("inumber acc w init " + this.accountNumber);
     });
 
-    console.log("id acc w init " + this.accountId);
-
     this.transferService.getTransfersByAccountId(+this.route.snapshot.paramMap.get('accountId')).subscribe(data => {
-      console.log("id acc w getAllTransfers " + this.accountId);
       this.transfersForOneAccountNumber = data;
       if (this.transfersForOneAccountNumber.length > 0) {
         this.conditionAreTransfers = true;
@@ -72,21 +73,18 @@ export class TransferDetailsComponent implements OnInit {
 
   }
   showAllTransfers() {
-    console.log('All');
     this.titleTransfers = 'Wszystkie';
     this.transfersToShow = this.transfersForOneAccountNumber;
     this.conditionAreTransfersToShow = this.conditionAreTransfersIn;
   }
 
   showOutTransfers() {
-    console.log('Out');
     this.titleTransfers = 'Wychodzące';
     this.transfersToShow = this.transfersOut;
     this.conditionAreTransfers = this.conditionAreTransfersOut;
   }
 
   showInTransfers() {
-    console.log('In');
     this.titleTransfers = 'Przychodzące';
     this.transfersToShow = this.transfersIn.filter(transfer => transfer.transferStatus !== 'CANCELED');
     this.conditionAreTransfers = this.conditionAreTransfersIn;

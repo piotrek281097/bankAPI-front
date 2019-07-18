@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TransferService } from 'src/app/services/transfer.service';
-import {ErrorStateMatcher} from '@angular/material/core';
-import {FormBuilder, NgForm, FormGroup, Validators, FormControl, FormGroupDirective} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { FormBuilder, NgForm, FormGroup, Validators, FormControl, FormGroupDirective } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmTransferDialogService } from 'src/app/services/confirm-transfer-dialog.service';
 

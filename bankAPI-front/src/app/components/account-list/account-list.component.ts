@@ -2,12 +2,9 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
 import { Account } from 'src/app/models/account';
 import { Router } from '@angular/router';
-import { Pipe, PipeTransform } from '@angular/core';
-import { FilterPipe } from 'ngx-filter-pipe';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import {startWith, map} from 'rxjs/operators';
-import { Button } from 'protractor';
 import { ConfirmDeleteDialogService } from 'src/app/services/confirm-delete-dialog.service';
 
 @Component({
@@ -25,7 +22,7 @@ export class AccountListComponent implements OnInit{
   control = new FormControl();
   owners: string[] = [];
   filteredAccounts: Observable<string[]>;
-  isButtonShowAllAccountsVisible: boolean = false;
+  isButtonShowAllAccountsVisible: boolean;
 
   config: any;
 
@@ -40,6 +37,8 @@ export class AccountListComponent implements OnInit{
       currentPage: 1,
       totalItems: 0,
     };
+
+    this.isButtonShowAllAccountsVisible = false;
   }
 
   ngOnInit() {
@@ -49,8 +48,6 @@ export class AccountListComponent implements OnInit{
       for (const account of this.accounts) {
         this.owners.push(account.ownerName);
       }
-
-      console.log(this.owners);
 
       this.filteredAccounts = this.control.valueChanges.pipe(
         startWith(''),
@@ -75,17 +72,17 @@ export class AccountListComponent implements OnInit{
   }
 
   onClickField(accountId: number) {
-    console.log("onClickField dziala " + accountId);
+    console.log('onClickField dziala ' + accountId);
     this.router.navigate(['/transferdetails/' + accountId]);
   }
 
   editAccount(accountId: number) {
-    console.log("edit " + accountId);
+    console.log('edit ' + accountId);
     this.router.navigate(['/edit-account/' + accountId]);
   }
 
   deleteAccount(accountId: number, accountNumber: string, money: number, currency: string, ownerName: string) {
-    console.log("delete " + accountId);
+    console.log('delete ' + accountId);
     this.confirmDeleteDialogService.openConfirmDeleteDialog(accountId, accountNumber, money, currency, ownerName);
   }
 

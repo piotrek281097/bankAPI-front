@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Account } from '../models/account';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class AccountService {
