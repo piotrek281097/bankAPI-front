@@ -34,7 +34,7 @@
     </thead>
 
       <tr *ngFor="let transfer of transfersToShow; let i=index">
-        <ng-container *ngIf="!(transfer.transferStatus === 'CANCELED' && accountNumber === transfer.secondAccountNumber)">
+        <ng-container *ngIf="!(transfer.transferStatus === 'CANCELED' && accountNumber === transfer.secondAccountNumber || transfer.transferStatus === 'OPENED' && accountNumber === transfer.secondAccountNumber)">
           <td>{{ i + 1 }}</td>
           <td>{{ transfer.firstAccountNumber }}</td>
           <td>{{ transfer.secondAccountNumber }}</td>
