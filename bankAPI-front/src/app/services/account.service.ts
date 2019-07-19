@@ -35,7 +35,7 @@ export class AccountService {
   public save(account: Account) {
     this.prepareHeader();
 
-    return this.http.post('https://bankrestapicomarch.herokuapp.com/api/accounts/add', account, {headers: this.headersObject}).toPromise()
+    return this.http.post('/api/accounts/add', account, {headers: this.headersObject}).toPromise()
     .then((res: Response) => {
       this.toastrService.success('Dodano rachunek');
       setTimeout( () => {
