@@ -36,14 +36,14 @@
       <tr *ngFor="let transfer of transfersToShow; let i=index">
         <ng-container *ngIf="!(transfer.transferStatus === 'CANCELED' && accountNumber === transfer.secondAccountNumber || transfer.transferStatus === 'OPENED' && accountNumber === transfer.secondAccountNumber)">
           <td>{{ i + 1 }}</td>
-          <td>{{ transfer.firstAccountNumber }}</td>
-          <td>{{ transfer.secondAccountNumber }}</td>
+          <td>{{ transfer.sendingAccount.accountNumber }}</td>
+          <td>{{ transfer.targetAccount.accountNumber }}</td>
           <td>{{ transfer.money | number:'1.2-2' }}</td>
           <td>{{ transfer.currency }}</td>
           <td>{{ transfer.dataOpenTransfer | date:'short' }}</td>
           <td *ngIf="transfer.dataFinishTransfer !== null" >{{ transfer.dataFinishTransfer | date:'short' }}</td>
           <td *ngIf="transfer.dataFinishTransfer === null" >Brak</td>
-          <td>{{ transfer.transferStatus }} <button *ngIf="transfer.transferStatus === 'OPENED' && accountNumber === transfer.firstAccountNumber"
+          <td>{{ transfer.transferStatus }} <button *ngIf="transfer.transferStatus === 'OPENED' && accountNumber === transfer.sendingAccount.accountNumber"
             [disabled]="isButtonCancelClicked" type="submit" class="btn btn-danger" (click)="cancelTransfer(transfer.transferId)">Anuluj</button></td>
         </ng-container>
       </tr>

@@ -4,6 +4,7 @@ export class Account {
   money: number;
   currency: string;
   ownerName: string;
+  isVisible: boolean;
 
   constructor() {}
 }

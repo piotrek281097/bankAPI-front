@@ -62,13 +62,7 @@ export class AccountService {
   public delete(accountId: number) {
     this.prepareHeader();
 
-    this.http.delete('/api/accounts/delete/' + accountId, {headers: this.headersObject}).subscribe(a => a);
-  }
-
-  public findByNumber(accountNumber: string): Observable<Account> {
-      this.prepareHeader();
-
-      return this.http.get<Account>('/api/accounts/findByNumber/' + accountNumber, {headers: this.headersObject});
+    this.http.put('/api/accounts/delete/' + accountId, {headers: this.headersObject}).subscribe(a => a);
   }
 
   public findByAccountId(accountId: number): Observable<Account> {

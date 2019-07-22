@@ -1,7 +1,7 @@
 export class Transfer {
   transferId: number;
-  firstAccountNumber: string;
-  secondAccountNumber: string;
+  sendingAccount: Account;
+  targetAccount: Account;
   money: number;
   currency: string;
   dataOpenTransfer: string;
