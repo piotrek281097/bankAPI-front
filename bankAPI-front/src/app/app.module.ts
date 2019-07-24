@@ -32,6 +32,9 @@ import { MatTabsModule } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ConfirmDeleteComponent } from 'src/app/components/confirm-delete/confirm-delete.component';
+import { TransferExternalFormComponent } from 'src/app/components/transfer-external-form/transfer-external-form.component';
+import { MakeTransferComponent } from 'src/app/components/make-transfer/make-transfer.component';
+import { ExternalTransferService } from './services/external-transfer.service';
 
 
 
@@ -47,6 +50,8 @@ import { ConfirmDeleteComponent } from 'src/app/components/confirm-delete/confir
     EditAccountFormComponent,
     ConfirmTransferComponent,
     ConfirmDeleteComponent,
+    TransferExternalFormComponent,
+    MakeTransferComponent,
 
   ],
   imports: [
@@ -83,7 +88,7 @@ import { ConfirmDeleteComponent } from 'src/app/components/confirm-delete/confir
     }),
   ],
   entryComponents: [ConfirmTransferComponent, ConfirmDeleteComponent],
-  providers: [AccountService, TransferService, ConfirmTransferComponent,  ],
+  providers: [AccountService, TransferService, ConfirmTransferComponent, ExternalTransferService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,13 +6,14 @@ import { AccountFormComponent } from './components/account-form/account-form.com
 import { TransferFormComponent } from './components/transfer-form/transfer-form.component';
 import { TransferDetailsComponent } from './components/transfer-details/transfer-details.component';
 import { EditAccountFormComponent } from './components/edit-account-form/edit-account-form.component';
+import { MakeTransferComponent } from './components/make-transfer/make-transfer.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'accounts', component: AccountListComponent },
   { path: 'add', component: AccountFormComponent },
-  { path: 'maketransfer', component: TransferFormComponent },
+  { path: 'maketransfer', component: MakeTransferComponent },
   { path: 'transferdetails/:accountId', component: TransferDetailsComponent },
   { path: 'edit-account/:accountId', component: EditAccountFormComponent },
 ];

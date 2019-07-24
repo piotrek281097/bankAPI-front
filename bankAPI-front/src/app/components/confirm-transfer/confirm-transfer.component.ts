@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { TransferService } from 'src/app/services/transfer.service';
+import { ExternalTransferService } from 'src/app/services/external-transfer.service';
 
 @Component({
   selector: 'app-confirm-transfer',
@@ -16,6 +17,7 @@ export class ConfirmTransferComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) protected data,
     private dialogRef: MatDialogRef<ConfirmTransferComponent>,
+    private externalTransferService: ExternalTransferService,
     private transferService: TransferService
   ) { }
 
@@ -24,10 +26,19 @@ export class ConfirmTransferComponent implements OnInit {
 
   accept() {
     this.dialogRef.close();
-    this.transferService.makeTransfer(this.data.accountNumberFrom, this.data.accountNumberTo, this.data.money);
+
+    if (this.data.bankName === undefined) {
+      this.transferService.makeTransfer(this.data.accountNumberFrom, this.data.accountNumberTo, this.data.money, this.data.email);
+      setTimeout( () => {
+        window.location.reload();
+      }, 3000);
+    } else {
+    this.externalTransferService.makeExternalTransfer(this.data.accountNumberFrom, this.data.accountNumberTo,
+      this.data.money, this.data.bankName);
     setTimeout( () => {
       window.location.reload();
     }, 3000);
+    }
   }
 
   cancel() {

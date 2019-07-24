@@ -1,0 +1,16 @@
+<div class="container">
+<h4><strong>Wybierz rodzaj transferu:</strong></h4>
+<mat-form-field class="selectField">
+  <mat-label> {{ transferType }} </mat-label>
+  <mat-select #hasBackdrop>
+    <mat-option (click)="showTransferFormComponent()">Zwykły</mat-option>
+    <mat-option (click)="showTransferExternalFormComponent()">Zewnętrzany</mat-option>
+  </mat-select>
+</mat-form-field>
+</div>
+
+
+<app-transfer-form *ngIf="transferType === 'Zwykły'"></app-transfer-form>
+<app-transfer-external-form *ngIf="transferType === 'Zewnętrzny'"></app-transfer-external-form>
+
+

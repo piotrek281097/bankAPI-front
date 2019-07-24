@@ -4,12 +4,14 @@ import { Transfer } from '../models/transfer';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ExternalTransfer } from '../models/external-transfer';
 
 
 @Injectable()
-export class TransferService {
+export class ExternalTransferService {
 
   private headersObject: HttpHeaders;
+  private externalTransfer: ExternalTransfer;
 
   prepareHeader() {
     this.headersObject = new HttpHeaders();
@@ -22,33 +24,24 @@ export class TransferService {
     private router: Router,
     private toastrService: ToastrService) { }
 
-  public getTransfersByAccountId(accountId: number): Observable<Transfer[]> {
+  public makeExternalTransfer(accountNumberFrom: string, accountNumberTo: string, money: number, bankName: string) {
     this.prepareHeader();
-    return this.http.get<Transfer[]>('api/transfers/findByAccountId/' + accountId, {headers: this.headersObject});
-  }
 
-  public getTransfersOutByAccountId(accountId: number): Observable<Transfer[]> {
-    this.prepareHeader();
-    return this.http.get<Transfer[]>('api/transfersOut/findByAccountId/' + accountId, {headers: this.headersObject});
-  }
+    this.externalTransfer = new ExternalTransfer();
 
-  public getTransfersInByAccountId(accountId: number): Observable<Transfer[]> {
-    this.prepareHeader();
-    return this.http.get<Transfer[]>('api/transfersIn/findByAccountId/' + accountId, {headers: this.headersObject});
-  }
-
-
-  public makeTransfer(accountNumberFrom: string, accountNumberTo: string, money: number, email: string) {
-    this.prepareHeader();
+    this.externalTransfer.amount = money;
+    this.externalTransfer.bankName = bankName;
+    this.externalTransfer.currency = '';
+    this.externalTransfer.externalAccount = accountNumberFrom;
+    this.externalTransfer.toAccount = accountNumberTo;
 
     if (accountNumberFrom === accountNumberTo) {
       this.toastrService.error('BŁĄD! Nr rachunku nadawcy i odbiorcy nie może być taki sam.');
     } else {
-      this.http.put('api/accounts/transfer/' + accountNumberFrom + '/' + accountNumberTo + '/' + money + '/' + email,
-      {headers: this.headersObject})
+      this.http.post('api/accounts/transfer-external/', this.externalTransfer, {headers: this.headersObject})
       .toPromise()
         .then((res: Response) => {
-          this.toastrService.success('Zlecono przelew');
+          this.toastrService.success('Zlecono przelew zewnętrzny');
         }
         )
         .catch(error => {
@@ -89,5 +82,3 @@ export class TransferService {
     });
   }
 }
-
-

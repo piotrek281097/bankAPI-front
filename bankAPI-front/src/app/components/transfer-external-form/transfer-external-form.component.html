@@ -1,0 +1,40 @@
+<div class="container">
+  <h1>Formatka transferu</h1>
+  <form [formGroup]= "transferForm">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Nr rachunku nadawcy" formControlName="firstAccountNumber" id="firstAccountNumber" class="form-control"
+              [errorStateMatcher]="matcher">
+      <mat-error *ngIf="FormControl.hasError('required')">
+        Nr rachunku nadawcy jest <strong>wymagany</strong> oraz musi składać się z <strong> 26 cyfr </strong>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Nr rachunku odbiorcy" formControlName="secondAccountNumber" id="secondAccountNumber" class="form-control"
+              [errorStateMatcher]="matcher">
+      <mat-error *ngIf="FormControl.hasError('required')">
+        Nr rachunku odbiorcy jest <strong>wymagany</strong> oraz musi składać się z <strong> 26 cyfr </strong>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Pieniądze" formControlName="money" id="money" class="form-control"
+              [errorStateMatcher]="matcher">
+      <mat-error *ngIf="FormControl.hasError('required')">
+          Pieniądze są <strong>wymagane</strong>, używamy <strong> kropki. </strong> Np. 100.00
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Nazwa banku" formControlName="bankName" id="bankName" class="form-control"
+              [errorStateMatcher]="matcher">
+      <mat-error *ngIf="FormControl.hasError('required')">
+        Nazwa banku jest <strong>wymagana</strong>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+    <button type="submit" class="btn btn-success" (click)="onSubmit()">Wykonaj przelew zewnętrzny</button>
+    <button type="submit" class="btn btn-primary" (click)="cancel()">Powrót do strony głównej</button>
+  </form>
+</div>
+

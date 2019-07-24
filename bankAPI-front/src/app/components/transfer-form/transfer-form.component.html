@@ -25,6 +25,14 @@
         </mat-error>
       </mat-form-field>
       <br><br>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="E-mail" formControlName="email" id="email" class="form-control"
+                [errorStateMatcher]="matcher">
+        <mat-error *ngIf="FormControl.hasError('required')">
+            Email jest <strong>wymagany</strong>
+        </mat-error>
+      </mat-form-field>
+      <br><br>
       <button type="submit" class="btn btn-success" (click)="onSubmit()">Wykonaj przelew</button>
       <button type="submit" class="btn btn-primary" (click)="cancel()">Powrót do strony głównej</button>
     </form>
