@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from 'src/app/services/account.service';
+import { Account } from 'src/app/models/account';
+import { ExternalAccount } from 'src/app/models/external-account';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  accounts: ExternalAccount[];
+
+  constructor(
+    private accountService: AccountService,
+  ) {}
+
 
   ngOnInit() {
+    this.accountService.getAllAccountsFromMagda().subscribe(data => {
+      this.accounts = data;
+    });
   }
 }

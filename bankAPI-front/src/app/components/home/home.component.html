@@ -2,4 +2,25 @@
   <img src="assets/images/logo.PNG" class="center" width=200 height=200>
   <br><br>
   <app-account-list isHomeComponentLoaded='true'></app-account-list>
+  <br><br>
+  <h1 style="text-align: center">Lista rachunków od Magdy</h1>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Nr</th>
+        <th scope="col">Numer konta</th>
+        <th scope="col">Pieniądze</th>
+        <th scope="col">Waluta</th>
+        <th scope="col">Właściciel</th>
+      </tr>
+    </thead>
+
+    <tr *ngFor="let account of accounts; let i=index">
+      <td>{{ i + 1 }} </td>
+      <td>{{ account.number }}</td>
+      <td>{{ account.money | number:'1.2-2' }}</td>
+      <td>{{ account.currency }}</td>
+      <td>{{ account.owner }}</td>
+    </tr>
+  </table>
 </div>

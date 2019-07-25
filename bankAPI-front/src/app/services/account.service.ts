@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EMPTY, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ExternalAccount } from '../models/external-account';
 
 @Injectable()
 export class AccountService {
@@ -31,6 +32,10 @@ export class AccountService {
     return this.http.get<Account[]>('/api/accounts', {headers: this.headersObject});
   }
 
+  public getAllAccountsFromMagda(): Observable<ExternalAccount[]> {
+    this.prepareHeader();
+    return this.http.get<ExternalAccount[]>('/api/accounts-external', {headers: this.headersObject});
+  }
 
   public save(account: Account) {
     this.prepareHeader();
