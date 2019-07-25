@@ -63,8 +63,8 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "bankAPI-front:build:production",
-              "proxyConfig": "proxy.config.json"
+              "browserTarget": "bankAPI-front:build:production"
+
             }
           }
         },
