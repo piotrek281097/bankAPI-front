@@ -29,18 +29,18 @@ export class AccountService {
 
   public getAllAccounts(): Observable<Account[]> {
     this.prepareHeader();
-    return this.http.get<Account[]>('https://bankrestapicomarch.herokuapp.com/accounts', {headers: this.headersObject});
+    return this.http.get<Account[]>('/api/accounts', {headers: this.headersObject});
   }
 
   public getAllAccountsFromMagda(): Observable<ExternalAccount[]> {
     this.prepareHeader();
-    return this.http.get<ExternalAccount[]>('https://bankrestapicomarch.herokuapp.com/accounts-external', {headers: this.headersObject});
+    return this.http.get<ExternalAccount[]>('/api/accounts-external', {headers: this.headersObject});
   }
 
   public save(account: Account) {
     this.prepareHeader();
 
-    return this.http.post('https://bankrestapicomarch.herokuapp.com/accounts/add', account, {headers: this.headersObject}).toPromise()
+    return this.http.post('/api/accounts/add', account, {headers: this.headersObject}).toPromise()
     .then((res: Response) => {
       this.toastrService.success('Dodano rachunek');
       setTimeout( () => {
