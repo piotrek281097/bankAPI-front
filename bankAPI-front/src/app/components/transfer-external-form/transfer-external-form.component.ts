@@ -28,6 +28,7 @@ export class TransferExternalFormComponent implements OnInit {
   accountNumberTo: string;
   money: number;
   bankName: string;
+  email: string;
 
   matcher = new MyErrorStateMatcher();
 
@@ -47,7 +48,8 @@ export class TransferExternalFormComponent implements OnInit {
       firstAccountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26), Validators.pattern('^[0-9]*$')]],
       secondAccountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26), Validators.pattern('^[0-9]*$')]],
       money: ['', [Validators.required, Validators.pattern('^[0-9]*([.][0-9]{1,2})?$') ]],
-      bankName: ['', [Validators.required, Validators.maxLength(50)]]
+      bankName: ['', [Validators.required, Validators.maxLength(50)]],
+      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')]]
     });
   }
 
@@ -61,10 +63,11 @@ export class TransferExternalFormComponent implements OnInit {
       console.log(this.transferForm.value.money);
       this.bankName = this.transferForm.value.bankName;
       console.log(this.transferForm.value.bankName);
+      this.email = this.transferForm.value.email;
 
       if (!this.transferForm.invalid) {
         this.confirmTransferDialogService.openConfirmExternalTransferDialog(this.accountNumberFrom, this.accountNumberTo,
-          this.money, this.bankName);
+          this.money, this.bankName, this.email);
       } else {
         this.toastrService.error('BŁĄD! Nieprawidłowe dane. Nie można wykonać takiego przelewu.');
       }

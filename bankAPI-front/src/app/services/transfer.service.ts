@@ -38,13 +38,13 @@ export class TransferService {
   }
 
 
-  public makeTransfer(accountNumberFrom: string, accountNumberTo: string, money: number, email: string) {
+  public makeTransfer(accountNumberFrom: string, accountNumberTo: string, money: number) {
     this.prepareHeader();
 
     if (accountNumberFrom === accountNumberTo) {
       this.toastrService.error('BŁĄD! Nr rachunku nadawcy i odbiorcy nie może być taki sam.');
     } else {
-      this.http.put('api/accounts/transfer/' + accountNumberFrom + '/' + accountNumberTo + '/' + money + '/' + email,
+      this.http.put('api/accounts/transfer/' + accountNumberFrom + '/' + accountNumberTo + '/' + money,
       {headers: this.headersObject})
       .toPromise()
         .then((res: Response) => {

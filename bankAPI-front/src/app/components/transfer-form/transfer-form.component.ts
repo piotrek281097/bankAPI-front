@@ -26,7 +26,6 @@ export class TransferFormComponent implements OnInit {
   accountNumberFrom: string;
   accountNumberTo: string;
   money: number;
-  email: string;
 
   matcher = new MyErrorStateMatcher();
 
@@ -47,7 +46,6 @@ export class TransferFormComponent implements OnInit {
       firstAccountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26), Validators.pattern('^[0-9]*$')]],
       secondAccountNumber: ['', [Validators.required, Validators.minLength(26), Validators.maxLength(26), Validators.pattern('^[0-9]*$')]],
       money: ['', [Validators.required, Validators.pattern('^[0-9]*([.][0-9]{1,2})?$') ]],
-      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')]]
     });
   }
 
@@ -59,11 +57,9 @@ export class TransferFormComponent implements OnInit {
       console.log(this.transferForm.value.secondAccountNumber);
       this.money = this.transferForm.value.money;
       console.log(this.transferForm.value.money);
-      this.email = this.transferForm.value.email;
-      console.log(this.transferForm.value.email);
 
       if (!this.transferForm.invalid) {
-        this.confirmTransferDialogService.openConfirmTransferDialog(this.accountNumberFrom, this.accountNumberTo, this.money, this.email);
+        this.confirmTransferDialogService.openConfirmTransferDialog(this.accountNumberFrom, this.accountNumberTo, this.money);
       } else {
         this.toastrService.error('BŁĄD! Nieprawidłowe dane. Nie można wykonać takiego przelewu.');
       }

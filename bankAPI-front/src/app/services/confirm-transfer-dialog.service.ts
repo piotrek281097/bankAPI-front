@@ -9,7 +9,7 @@ export class ConfirmTransferDialogService {
 
   constructor(private dialog: MatDialog) { }
 
-  openConfirmTransferDialog(accountNumberFrom, accountNumberTo, money, email) {
+  openConfirmTransferDialog(accountNumberFrom, accountNumberTo, money) {
    return this.dialog.open(ConfirmTransferComponent, {
       panelClass: 'dialog-container',
       disableClose: true,
@@ -18,12 +18,11 @@ export class ConfirmTransferDialogService {
         accountNumberFrom : accountNumberFrom,
         accountNumberTo : accountNumberTo,
         money : money,
-        email: email
       }
     });
   }
 
-  openConfirmExternalTransferDialog(accountNumberFrom, accountNumberTo, money, bankName) {
+  openConfirmExternalTransferDialog(accountNumberFrom, accountNumberTo, money, bankName, email) {
     return this.dialog.open(ConfirmTransferComponent, {
        panelClass: 'dialog-container',
        disableClose: true,
@@ -32,7 +31,8 @@ export class ConfirmTransferDialogService {
          accountNumberFrom : accountNumberFrom,
          accountNumberTo : accountNumberTo,
          money : money,
-         bankName: bankName
+         bankName: bankName,
+         email: email
        }
      });
    }

@@ -28,13 +28,13 @@ export class ConfirmTransferComponent implements OnInit {
     this.dialogRef.close();
 
     if (this.data.bankName === undefined) {
-      this.transferService.makeTransfer(this.data.accountNumberFrom, this.data.accountNumberTo, this.data.money, this.data.email);
+      this.transferService.makeTransfer(this.data.accountNumberFrom, this.data.accountNumberTo, this.data.money);
       setTimeout( () => {
         window.location.reload();
-      }, 3000);
+      }, 7000);
     } else {
     this.externalTransferService.makeExternalTransfer(this.data.accountNumberFrom, this.data.accountNumberTo,
-      this.data.money, this.data.bankName);
+      this.data.money, this.data.bankName, this.data.email);
     setTimeout( () => {
       window.location.reload();
     }, 3000);

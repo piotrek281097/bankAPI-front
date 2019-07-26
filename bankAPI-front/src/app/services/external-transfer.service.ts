@@ -24,7 +24,7 @@ export class ExternalTransferService {
     private router: Router,
     private toastrService: ToastrService) { }
 
-  public makeExternalTransfer(accountNumberFrom: string, accountNumberTo: string, money: number, bankName: string) {
+  public makeExternalTransfer(accountNumberFrom: string, accountNumberTo: string, money: number, bankName: string, email: string) {
     this.prepareHeader();
 
     this.externalTransfer = new ExternalTransfer();
@@ -35,10 +35,11 @@ export class ExternalTransferService {
     this.externalTransfer.externalAccount = accountNumberFrom;
     this.externalTransfer.toAccount = accountNumberTo;
 
+
     if (accountNumberFrom === accountNumberTo) {
       this.toastrService.error('BŁĄD! Nr rachunku nadawcy i odbiorcy nie może być taki sam.');
     } else {
-      this.http.post('api/accounts/transfer-external/', this.externalTransfer, {headers: this.headersObject})
+      this.http.post('api/accounts/transfer-external/' + email, this.externalTransfer, {headers: this.headersObject})
       .toPromise()
         .then((res: Response) => {
           this.toastrService.success('Zlecono przelew zewnętrzny');
